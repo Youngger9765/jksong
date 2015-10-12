@@ -1,0 +1,11 @@
+<%= form_for @vote, :url => votes_path do |v|%>
+
+<div class="form-group">
+  <%= v.label :content, "法案內容" %>
+  <%= v.text_field :content, :class => "form-control" %>
+</div>
+
+<%= v.submit "送出",:class => "btn btn-primary" %>
+
+
+<% end %>
