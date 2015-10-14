@@ -5,6 +5,7 @@ class CreateVotes < ActiveRecord::Migration
       t.string :name
       t.string :content
       t.string :result
+      t.integer :category_id
       t.timestamps null: false
     end
   end
