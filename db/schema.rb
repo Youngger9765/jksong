@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20151014044037) do
 
-  create_table "catgories", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20151014044037) do
 
   create_table "issues", force: :cascade do |t|
     t.string   "name",        limit: 255
-    t.integer  "categoty_id", limit: 4
+    t.integer  "category_id", limit: 4
     t.string   "content",     limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
