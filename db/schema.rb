@@ -11,37 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013114218) do
+ActiveRecord::Schema.define(version: 20151014044037) do
 
-  create_table "categories", force: :cascade do |t|
+  create_table "catgories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   create_table "issues", force: :cascade do |t|
-    t.integer  "issue_id",    limit: 4
     t.string   "name",        limit: 255
-    t.string   "type",        limit: 255
+    t.integer  "categoty_id", limit: 4
     t.string   "content",     limit: 255
-    t.string   "comment",     limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.integer  "category_id", limit: 4
   end
-
-  add_index "issues", ["category_id"], name: "index_issues_on_category_id", using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.integer  "vote_seq",    limit: 4
     t.string   "name",        limit: 255
     t.string   "content",     limit: 255
     t.string   "result",      limit: 255
+    t.integer  "category_id", limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.integer  "category_id", limit: 4
   end
-
-  add_index "votes", ["category_id"], name: "index_votes_on_category_id", using: :btree
 
 end

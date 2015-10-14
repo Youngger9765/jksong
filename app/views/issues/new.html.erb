@@ -1,0 +1,16 @@
+<%= form_for @issue, :url => issues_path do |f|%>
+
+<div class="form-group">
+  <%= f.label :name, "議題名稱" %>
+  <%= f.text_field :name, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :content, "議題內容" %>
+  <%= f.text_field :content, :class => "form-control" %>
+</div>
+
+<%= f.submit "送出",:class => "btn btn-primary" %>
+
+
+<% end %>
