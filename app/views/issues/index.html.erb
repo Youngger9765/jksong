@@ -7,6 +7,7 @@
 <br>
 <table class="table">
   <tr>
+    <td>分類</td>
     <td>議題名稱</td>
     <td>議題內容</td>
     <td>控制</td>
@@ -14,6 +15,7 @@
 
   <% @issues.each do |i| %>
     <tr>
+      <td><%= i.category.name%></td>
       <td><%= link_to i.name, issue_path(i) %></td>
       <td><%= i.content %></td>
       <td><%= link_to "Delete", issue_path(i), :method => :delete, :class => "btn btn-danger" %></td>
