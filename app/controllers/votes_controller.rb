@@ -1,11 +1,14 @@
 class VotesController < ApplicationController
 
+before_action :authenticate_user!
+
+before_action :set_vote, :only => [:show, :edit, :update]
+
   def index
     @votes = Vote.all
   end
 
   def show
-    @vote = Vote.find(params[:id])
     
   end
 
@@ -21,11 +24,10 @@ class VotesController < ApplicationController
   end
 
   def edit
-    @vote = Vote.find(params[:id])
+
   end
 
   def update
-    @vote = Vote.find(params[:id])
     
     if @vote.update(vote_params)
       flash[:notice] = "event was successfully updated"
@@ -43,5 +45,8 @@ class VotesController < ApplicationController
     params.require(:vote).permit(:content, :result)
   end
 
+  def set_vote
+    @vote = Vote.find(params[:id])
+  end
 
 end
