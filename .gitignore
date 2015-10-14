@@ -6,6 +6,8 @@
 
 /public/system
 
+/config/initializers/devise.rb
+
 
 # Ignore bundler config.
 /.bundle
