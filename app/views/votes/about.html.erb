@@ -1,7 +1,11 @@
 <h1>關於我們</h1>
 
-<p> 法案數: </p>
+<p> 法案數: <%= @votes.count %></p>
 
-<p> 全民立委: </p>
+<p> 議題數: <%= @issues.count %></p>
+
+<p> 立委人數: </p>
+
+<p> 使用者： <%= @users.count %></p>
 
 <%= link_to "首頁", votes_path%>

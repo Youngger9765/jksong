@@ -9,7 +9,12 @@ class User < ActiveRecord::Base
 
   has_one :profile
 
+  has_many :issues
+  has_many :votes
 
+  def username
+    self.profile.username
+  end
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid

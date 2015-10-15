@@ -6,6 +6,12 @@ before_action :set_vote, :only => [:show, :edit, :update]
 
   def index
     @votes = Vote.all
+
+    if params[:vote_id]
+      @vote = Vote.find( params[:vote_id] )
+    else
+      @vote = Vote.new
+    end
   end
 
   def show
@@ -18,9 +24,15 @@ before_action :set_vote, :only => [:show, :edit, :update]
 
   def create
     @vote = Vote.new(vote_params)
-    @vote.save
-    flash[:notice] = "新增成功的訊息"
-    redirect_to votes_path
+    @vote.user = current_user
+
+    if @vote.save
+      flash[:notice] = "Create Success!"
+      redirect_to votes_path
+    else
+      flash[:alert] = "Create fail!"
+      render votes_path
+    end
   end
 
   def edit
@@ -37,12 +49,18 @@ before_action :set_vote, :only => [:show, :edit, :update]
     end
   end
 
+  def about
+    @users = User.all
+    @issues = Issue.all
+    @votes = Vote.all 
+  end
+
 
 
   private
 
   def vote_params
-    params.require(:vote).permit(:content, :result)
+    params.require(:vote).permit(:category_id, :user_id, :original_content, :result, :new_content)
   end
 
   def set_vote
