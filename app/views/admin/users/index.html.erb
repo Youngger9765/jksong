@@ -1,0 +1,17 @@
+<h1>Admin Index</h1>
+
+
+<h3>User Data</h3>
+<table class="table">
+    <tr>
+      <td>姓名</td>
+      <td>地點</td> 
+    </tr>
+  <% @profiles.each do |p|%>  
+    <tr>
+      <td><%= p.username %></td>
+      <td><%= p.location_id %></td>
+    </tr>
+  <% end %>
+
+</table>

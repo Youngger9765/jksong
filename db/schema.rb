@@ -34,8 +34,9 @@ ActiveRecord::Schema.define(version: 20151015014111) do
     t.integer  "user_id",     limit: 4
     t.integer  "location_id", limit: 4
     t.string   "status",      limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "role",        limit: 255, default: "normal"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "profiles", ["location_id"], name: "index_profiles_on_location_id", using: :btree

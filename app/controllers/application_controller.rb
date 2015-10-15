@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def check_admin
-    unless current_user.admin?
+    unless current_user.profile.admin?
       raise ActiveRecord::RecordNotFound
     end
   end

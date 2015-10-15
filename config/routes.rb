@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   resources :votes
 
+  namespace :admin do
+    resources :users
+  end  
+
 
   root :to => "issues#index"
   # The priority is based upon order of creation: first created -> highest priority.

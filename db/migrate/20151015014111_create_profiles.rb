@@ -5,6 +5,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer :user_id
       t.integer :location_id
       t.string :status
+      t.string :role, :default => "normal"
       t.timestamps null: false
     end
 
