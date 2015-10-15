@@ -1,0 +1,18 @@
+<h1>Admin/Issues Index</h1>
+
+
+<h3>Issues Data</h3>
+<table class="table">
+    <tr>
+      <td>議題</td>
+      <td>內容</td>
+      <td>分類</td> 
+    </tr>
+  <% @issues.each do |i|%>  
+    <tr>
+      <td><%= i.name %></td>
+      <td><%= i.content %></td>
+    </tr>
+  <% end %>
+
+</table>
