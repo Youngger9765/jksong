@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20151015014111) do
     t.integer  "location_id", limit: 4
     t.string   "status",      limit: 255
     t.string   "role",        limit: 255, default: "normal"
+    t.string   "bio",         limit: 255, default: "未填寫"
+    t.string   "occupation",  limit: 255, default: "未填寫"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end

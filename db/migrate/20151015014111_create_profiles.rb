@@ -6,6 +6,8 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer :location_id
       t.string :status
       t.string :role, :default => "normal"
+      t.string :bio, :default => "未填寫"
+      t.string :occupation, :default => "未填寫"
       t.timestamps null: false
     end
 

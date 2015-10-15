@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :issues
 
+  resources :profiles
+
   resources :votes
 
   namespace :admin do

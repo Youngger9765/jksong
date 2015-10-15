@@ -1,0 +1,41 @@
+<h1>Profile show</h1>
+
+
+
+<%= form_for @profile, :url => profile_path(@profile), :method => :patch do |f|%>
+
+<table class="table">
+    <tr>
+      <td>暱稱： <%= @profile.username  %></td>
+    </tr>  
+    <tr> 
+      <td>   
+        <div class="form-group">
+          <%= f.label :username, "名稱" %>
+          <%= f.text_field :username, :class => "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>居住地： <%= @profile.location_id  %> </td>
+    </tr> 
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :location_id, "地區" %>
+          <%= f.text_field :location_id, :class => "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+    <td>註冊時間： <%= @profile.created_at  %> </td>
+    </tr> 
+
+    <tr>
+      <td>角色： <%= @profile.role  %></td>
+    </tr> 
+</table>
+
+    <%= f.submit "送出",:class => "btn btn-primary" %>
+
+<% end %>
