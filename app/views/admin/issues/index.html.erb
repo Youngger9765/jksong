@@ -7,12 +7,35 @@
       <td>議題</td>
       <td>內容</td>
       <td>分類</td> 
+      <td>編輯</td>
     </tr>
   <% @issues.each do |i|%>  
     <tr>
       <td><%= i.name %></td>
       <td><%= i.content %></td>
+      <td><%= i.category.name%></td>
+      <td><%= i.user.username %> </td>
+      <td> <%= link_to "Edit", admin_issues_path(:issue_id => i.id ), :class => "btn btn-default"%> </td>
     </tr>
   <% end %>
 
 </table>
+
+<%
+  if !@issue.new_record? 
+  # if params[:issue_id]
+    #edit
+    url = admin_issue_path(@issue)
+    method = :patch
+  else 
+    #new
+    url = admin_issues_path
+    methdo = :post
+  end
+%>
+
+<%= form_for @issue, :url => url do |f| %>
+
+  <%= render :partial => 'form', :locals => { :f => f} %>
+
+<% end %>

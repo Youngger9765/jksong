@@ -11,9 +11,26 @@ class Admin::IssuesController < ApplicationController
   def index
     @issues = Issue.all
 
-    if params[:id]
-      @issue = Issue.find( params[:id] )
+    if params[:issue_id]
+      @issue = Issue.find( params[:issue_id] )
+    else
+      @issue = Issue.new
     end
+
+  end
+
+  def create
+    @issue = Issue.new(issue_params)
+    @issue.user = current_user
+
+    if @issue.save
+      flash[:notice] = "Create Success!"
+      redirect_to admin_issues_path
+    else
+      flash[:alert] = "Create fail!"
+      render admin_issues_path
+    end
+
   end
 
   def update

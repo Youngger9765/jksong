@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20151015014111) do
     t.string   "name",        limit: 255
     t.integer  "category_id", limit: 4
     t.string   "content",     limit: 255
+    t.integer  "user_id",     limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -65,13 +66,14 @@ ActiveRecord::Schema.define(version: 20151015014111) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "vote_seq",    limit: 4
-    t.string   "name",        limit: 255
-    t.string   "content",     limit: 255
-    t.string   "result",      limit: 255
-    t.integer  "category_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "vote_seq",         limit: 4
+    t.string   "original_content", limit: 255
+    t.string   "new_content",      limit: 255
+    t.string   "result",           limit: 255
+    t.integer  "category_id",      limit: 4
+    t.string   "user_id",          limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "votes", ["category_id"], name: "index_votes_on_category_id", using: :btree
