@@ -45,13 +45,13 @@
     
 
     <tr>
-      <td>居住地： <%= @profile.location_id  %> </td>
+      <td>居住地： <%= @profile.location.name  %> </td>
     </tr> 
     <tr>
       <td>
         <div class="form-group">
           <%= f.label :location_id, "地區" %>
-          <%= f.text_field :location_id, :class => "form-control" %>
+          <%= f.select :location_id, Location.all.map{|l| [l.name, l.id]}, :class => "form-control" %>
         </div>
       </td>
     </tr>
