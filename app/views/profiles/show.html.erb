@@ -16,6 +16,34 @@
         </div>
       </td>
     </tr>
+
+    <tr>
+      <td>性別： <%= @profile.bio  %> </td>
+    </tr> 
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :bio, "性別" %>
+          <%= f.select :bio,[["男","男"],["女","女"]] %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+    
+
+    <tr>
+      <td>職業： <%= @profile.occupation %> </td>
+    </tr> 
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :occupation, "職業" %>
+          <%= f.text_field :occupation, :class => "form-control" %>
+        </div>
+      </td>
+    </tr>
+    
+
     <tr>
       <td>居住地： <%= @profile.location_id  %> </td>
     </tr> 
@@ -27,8 +55,9 @@
         </div>
       </td>
     </tr>
+
     <tr>
-    <td>註冊時間： <%= @profile.created_at  %> </td>
+      <td>註冊時間： <%= @profile.created_at  %> </td>
     </tr> 
 
     <tr>
