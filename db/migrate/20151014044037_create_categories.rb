@@ -8,4 +8,7 @@ class CreateCategories < ActiveRecord::Migration
     end
   end
 
+  add_index :issues, :category_id
+  add_index :votes, :category_id
+
 end
