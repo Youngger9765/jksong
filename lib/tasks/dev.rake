@@ -60,7 +60,7 @@ namespace :dev do
   task :fetch_raw_legislators_votes => :environment do
     puts "fetching raw_lagisltor_votes"
 
-    url = "http://vote.ly.g0v.tw/api/legislator_vote/"
+    url = "http://vote.ly.g0v.tw/api/legislator_vote/?page=10205"
     raw_content = RestClient.get(url)
     data = JSON.parse( raw_content )
 
@@ -86,5 +86,26 @@ namespace :dev do
 
 end
 
+namespace :transfer do
+  task :trasfer_vote => :environment do
+    RawVote.all.each do |r|
+
+      Vote.create(  :url => r[:url],
+                    :uid => r[:uid],
+                    :original_content => r[:content],
+                    :conflict => r[:conflict],
+                    :result => r[:result])
+
+    end
+
+
+
+
+  end  
+
+
+
+
+end
 
 
