@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016043625) do
+ActiveRecord::Schema.define(version: 20151016073950) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -51,6 +51,32 @@ ActiveRecord::Schema.define(version: 20151016043625) do
   add_index "profiles", ["location_id"], name: "index_profiles_on_location_id", using: :btree
   add_index "profiles", ["status"], name: "index_profiles_on_status", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "raw_legislator_votes", force: :cascade do |t|
+    t.string   "url",        limit: 255
+    t.integer  "decision",   limit: 4
+    t.string   "conflict",   limit: 255, default: "false"
+    t.string   "legislator", limit: 255
+    t.string   "vote",       limit: 255
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  create_table "raw_legislators", force: :cascade do |t|
+    t.string   "url",        limit: 255
+    t.integer  "le_id",      limit: 4
+    t.string   "legislator", limit: 255
+    t.integer  "ad",         limit: 4
+    t.string   "name",       limit: 255
+    t.string   "gender",     limit: 255
+    t.string   "party",      limit: 255
+    t.string   "in_office",  limit: 255
+    t.text     "education",  limit: 65535
+    t.text     "experience", limit: 65535
+    t.string   "image",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "raw_votes", force: :cascade do |t|
     t.string   "url",        limit: 255

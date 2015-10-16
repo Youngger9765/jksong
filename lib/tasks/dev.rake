@@ -1,4 +1,4 @@
-namespace :raw_vote do
+namespace :dev do
 
   task :fetch_raw_vote => :environment do
     puts "fetching raw_vote"
@@ -26,12 +26,38 @@ namespace :raw_vote do
 
   end
 
+  task :fetch_raw_legislator => :environment do
+    puts "fetching raw_lagisltor"
+
+    url = "http://vote.ly.g0v.tw/api/legislator_terms/"
+    raw_content = RestClient.get(url)
+    data = JSON.parse( raw_content )
+
+      while data["next"] != nil 
+        puts url
+
+        data["results"].each do |r|
+
+          RawLegislator.create( :url => r["url"],
+                          :le_id => r["id"],
+                          :legislator => r["legislator"],
+                          :ad => r["ad"],
+                          :name => r["name"],
+                          :gender => r["gender"],
+                          :party => r["party"],
+                          :in_office => r["in_office"],
+                          :education => r["education"],
+                          :experience => r["experience"],
+                          :image => r["image"])  
+        end
+          url = data["next"]
+          raw_content = RestClient.get(url)
+          data = JSON.parse( raw_content )
+       end
+
+  end
+
 end
 
 
-namespace :raw_vote_to_vote do
-
-
-
-end
 
