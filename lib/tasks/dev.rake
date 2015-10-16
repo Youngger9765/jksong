@@ -95,14 +95,25 @@ namespace :transfer do
                     :original_content => r[:content],
                     :conflict => r[:conflict],
                     :result => r[:result])
-
     end
-
-
-
-
   end  
 
+  task :trasfer_legislator_8 => :environment do
+    RawLegislator.where(:ad => 8).each do |r|
+
+      Legislator.create(  :url => r[:url],
+                          :le_id => r[:le_id],
+                          :legislator => r[:legislator],
+                          :ad => r[:ad],
+                          :name => r[:name],
+                          :gender => r[:gender],
+                          :party => r[:party],
+                          :in_office => r[:in_office],
+                          :education => r[:education],
+                          :experience => r[:experience],
+                          :image => r[:image])
+    end
+  end  
 
 
 
