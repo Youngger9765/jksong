@@ -1,0 +1,43 @@
+<h1>Admin Votes index</h1>
+
+
+
+
+<table class="table">
+    <tr>
+      <td>法案白話文</td>
+      <td>法案原文</td>
+      <td>分類</td> 
+      <td>編輯</td>
+      <td>控制</td>
+    </tr>
+  <% @votes.each do |v|%>  
+    <tr>
+      <td><%= v.new_content %></td>
+      <td><%= v.original_content %></td>
+      <td><%= v.category.try(:name) %></td>
+      <td><%= v.user.try(:username) %> </td>
+      <td> <%= link_to "Edit", admin_votes_path(:vote_id => v.id ), :class => "btn btn-default"%> </td>
+    </tr>
+  <% end %>
+
+</table>
+
+<%
+  if !@vote.new_record? 
+  # if params[:vote_id]
+    #edit
+    url = admin_vote_path(@vote)
+    method = :patch
+  else 
+    #new
+    url = admin_votes_path
+    methdo = :post
+  end
+%>
+
+<%= form_for @vote, :url => url do |f| %>
+
+  <%= render :partial => 'form', :locals => { :f => f} %>
+
+<% end %>
