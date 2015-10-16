@@ -18,7 +18,7 @@
     </tr>
 
     <tr>
-      <td>性別： <%= @profile.bio  %> </td>
+      <td>性別： <%= @profile.try(:bio)  %> </td>
     </tr> 
     <tr>
       <td>
@@ -30,7 +30,6 @@
     </tr>
     <tr>
     
-
     <tr>
       <td>職業： <%= @profile.occupation %> </td>
     </tr> 
@@ -43,9 +42,8 @@
       </td>
     </tr>
     
-
     <tr>
-      <td>居住地： <%= @profile.location.name  %> </td>
+      <td>居住地： <%= @profile.location.try( :name ) %> </td>
     </tr> 
     <tr>
       <td>
@@ -68,3 +66,7 @@
     <%= f.submit "送出",:class => "btn btn-primary" %>
 
 <% end %>
+
+<br>
+
+<%= link_to "想審更多法案嗎？", issues_path, :class => "btn btn-default"%>

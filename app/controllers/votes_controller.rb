@@ -6,6 +6,7 @@ before_action :set_vote, :only => [:show, :edit, :update]
 
   def index
     @votes = Vote.all
+    @raw_votes = RawVote.all
 
     if params[:vote_id]
       @vote = Vote.find( params[:vote_id] )

@@ -13,12 +13,12 @@
       <td>編輯</td>
       <td>控制</td>
     </tr>
-  <% @votes.each do |v|%>  
+  <% @raw_votes.each do |v|%>  
     <tr>
-      <td><%= v.new_content %></td>
-      <td><%= v.original_content %></td>
-      <td><%= v.category.name%></td>
-      <td><%= v.user.username %> </td>
+      <td><%= v.url %></td>
+      <td><%= v.uid %></td>
+      <td><%= v.content %></td>
+      <td><%= v.content %> </td>
       <td> <%= link_to "Edit", votes_path(:vote_id => v.id ), :class => "btn btn-default"%> </td>
     </tr>
   <% end %>

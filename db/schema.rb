@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015141626) do
+ActiveRecord::Schema.define(version: 20151016043625) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20151015141626) do
   create_table "profiles", force: :cascade do |t|
     t.string   "username",    limit: 255
     t.integer  "user_id",     limit: 4
-    t.integer  "location_id", limit: 4
-    t.string   "status",      limit: 255
+    t.integer  "location_id", limit: 4,   default: 0
+    t.string   "status",      limit: 255, default: "未填寫"
     t.string   "role",        limit: 255, default: "normal"
     t.string   "bio",         limit: 255, default: "未填寫"
     t.string   "occupation",  limit: 255, default: "未填寫"
@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 20151015141626) do
   add_index "profiles", ["location_id"], name: "index_profiles_on_location_id", using: :btree
   add_index "profiles", ["status"], name: "index_profiles_on_status", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "raw_votes", force: :cascade do |t|
+    t.string   "url",        limit: 255
+    t.string   "uid",        limit: 255
+    t.string   "sitting_id", limit: 255
+    t.string   "vote_seq",   limit: 255
+    t.text     "content",    limit: 16777215
+    t.string   "conflict",   limit: 255
+    t.string   "results",    limit: 255
+    t.string   "result",     limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -74,9 +87,11 @@ ActiveRecord::Schema.define(version: 20151015141626) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "vote_seq",         limit: 4
+    t.string   "url",              limit: 255
+    t.string   "uid",              limit: 255
     t.string   "original_content", limit: 255
     t.string   "new_content",      limit: 255
+    t.string   "conflict",         limit: 255
     t.string   "result",           limit: 255
     t.integer  "category_id",      limit: 4
     t.string   "user_id",          limit: 255

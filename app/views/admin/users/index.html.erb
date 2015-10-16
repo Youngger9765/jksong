@@ -10,7 +10,7 @@
   <% @profiles.each do |p|%>  
     <tr>
       <td><%= p.username %></td>
-      <td><%= p.location_id %></td>
+      <td><%= p.location.try(:name) %></td>
     </tr>
   <% end %>
 
