@@ -1,7 +1,13 @@
 class IssuesController < ApplicationController
 
   def index
-    @issues = Issue.all
+    if params[:category_id]
+      @issues = Issue.where(:category_id => params[:category_id])
+
+    else
+      @issues = Issue.all
+    end
+
   end
 
   def show
