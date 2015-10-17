@@ -1,0 +1,21 @@
+<h1>Category index</h1>
+
+<table class="table">
+  <tr>
+    <td>分類</td>
+    <td>議題數量</td>
+    <td>法案數量</td>
+  </tr>
+
+
+  <% @categories.each do |c|%>
+    <tr>
+      <td><%= c.name %></td>  
+      <td><%= c.issues.count %></td>
+      <td><%= c.votes.count%></td> 
+
+    </tr>
+  <% end %>
+
+
+</table>

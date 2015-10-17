@@ -34,8 +34,8 @@
           </div>
         <% end %>
 
-        <%= link_to "法案", votes_path,:class => "btn btn-default"%>
-        <%= link_to "議題", issues_path,:class => "btn btn-default"%>
+        
+        <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
         <% if current_user %>
           <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
         <% end %>

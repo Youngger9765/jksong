@@ -4,16 +4,23 @@ Rails.application.routes.draw do
 
   get "/about" => "votes#about"
 
-  resources :issues
+  
 
   resources :profiles
-
+  resources :issues
   resources :votes
+
+  resources :categories do
+    resources :issues do
+      resources :votes
+    end
+  end
 
   namespace :admin do
     resources :users
     resources :issues
     resources :votes
+    resources :categories
   end  
 
 
