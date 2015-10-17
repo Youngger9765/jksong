@@ -1,8 +1,5 @@
 <h1>議題 Index</h1>
 
-<div>  
-  <%= link_to "新議題", new_issue_path,:class => "btn btn-primary"%>
-</div>
 
 <br>
 <table class="table">
@@ -10,7 +7,6 @@
     <td>分類</td>
     <td>議題名稱</td>
     <td>議題內容</td>
-    <td>控制</td>
   </tr>
 
   <% @issues.each do |i| %>
@@ -18,8 +14,6 @@
       <td><%= i.category.name%></td>
       <td><%= link_to i.name, issue_path(i) %></td>
       <td><%= i.content %></td>
-      <td><%= link_to "Delete", issue_path(i), :method => :delete, :class => "btn btn-danger" %></td>
-      
     </tr>
   <% end %>
 
