@@ -12,7 +12,7 @@
     </tr>
   <% @issues.each do |i|%>  
     <tr>
-      <td><%= i.name %></td>
+      <td><%= link_to i.name, admin_issue_path(i) %></td>
       <td><%= i.content %></td>
       <td><%= i.category.name%></td>
       <td><%= i.user.try(:username) %> </td>

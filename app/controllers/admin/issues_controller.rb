@@ -19,6 +19,11 @@ class Admin::IssuesController < ApplicationController
 
   end
 
+  def show
+    @issue = Issue.find(params[:id])
+  end
+
+
   def create
     @issue = Issue.new(issue_params)
     @issue.user = current_user
@@ -35,14 +40,29 @@ class Admin::IssuesController < ApplicationController
 
   def update
     Issue.find(params[:id]).update(issue_params)
+    vote_list = params[:issue][:vote_list]
+    vote_list.shift(1)
+
+    vote_list.each do|v|
+      vote_id = v.to_i
+      IssueVoteShip.create( :issue_id => params[:id], :vote_id => vote_id)
+    end
+
     flash[:notice] = "Update Success!"
-    redirect_to admin_issues_path   
+    redirect_to admin_issue_path(params[:id])  
+  end
+
+  def destroy
+    vote = IssueVoteShip.where(:issue_id => params[:id]).find_by_vote_id(params[:vote])
+    vote.destroy
+    vote.save
+    redirect_to admin_issue_path(params[:id])
   end
 
   protected
 
   def issue_params
-    params.require(:issue).permit(:name, :category_id, :content)
+    params.require(:issue).permit(:name, :category_id, :content, :vote_list)
   end
 
 end

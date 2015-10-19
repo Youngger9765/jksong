@@ -3,18 +3,26 @@
 <table class="table">
   <tr>
     <td>議題名稱： <%= @issue.name %></td>
-    
   </tr>
+  
   <tr>
     <td>議題內容： <%= @issue.content %></td>
   </tr>
+
   <tr>
-    <td>相關法案：</td>
+    <td>相關法案：<%= @issue.votes.count %></td>
+  </tr>
+
+  <tr>
+    <% @issue.votes.each do |v| %>
+      <td> <%= link_to v.uid%> </td>
+    <% end %>
   </tr>
 
   <tr>
     <td>你的表態：<%=  @p.try(:decision) %></td> 
   </tr>
+
 </table>
 
 

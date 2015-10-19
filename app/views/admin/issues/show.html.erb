@@ -1,0 +1,54 @@
+<h1>議題 -> 法案</h1>
+
+<table class="table">
+  <%= @issue.name%>
+
+  <% @issue.votes.each do |v| %>
+    <tr>
+      <td><%=v.uid %></td>
+      <td><%= link_to "刪除", admin_issue_path(@issue, :vote => v), :method => :delete, :class => "btn btn-primary" %></td>
+    </tr>
+  <%end%>
+
+</table>
+
+<hr>
+
+<%= form_for @issue, :url => admin_issue_path(@issue) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "議題名稱" %>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content, "議題內容" %>
+    <%= f.text_field :content, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category_id, "分類" %>
+    <%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] }, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :vote_list , "法案" %>
+    <%= f.select :vote_list, Vote.all.map{ |x| [x.uid, x.id]}, {}, :multiple => "true" , :class => "form-control" %>
+  </div>
+
+
+  <%= f.submit "更新",:class => "btn btn-primary" %>
+
+<% end %>
+
+<script>
+  $("#issue_category_id").select2();
+
+  $("#issue_vote_list").select2({
+     tags: <%=raw Vote.all.map{ |t| t.uid }.to_json %>,
+     tokenSeparators: [',', ' ']
+   });
+
+
+
+</script>
+

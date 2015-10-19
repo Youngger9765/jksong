@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 20151019063741) do
   end
 
   create_table "issue_vote_ships", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "issue_id",   limit: 4
+    t.integer  "vote_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "issues", force: :cascade do |t|
