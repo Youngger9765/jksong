@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016154944) do
+ActiveRecord::Schema.define(version: 20151017161849) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 20151016154944) do
   end
 
   add_index "issues", ["category_id"], name: "index_issues_on_category_id", using: :btree
+
+  create_table "legislator_vote_ships", force: :cascade do |t|
+    t.integer  "legislator_id", limit: 4
+    t.integer  "vote_id",       limit: 4
+    t.string   "decision",      limit: 255
+    t.string   "conflict",      limit: 255, default: "false"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+  end
+
+  add_index "legislator_vote_ships", ["legislator_id"], name: "index_legislator_vote_ships_on_legislator_id", using: :btree
+  add_index "legislator_vote_ships", ["vote_id"], name: "index_legislator_vote_ships_on_vote_id", using: :btree
 
   create_table "legislators", force: :cascade do |t|
     t.string   "url",        limit: 255

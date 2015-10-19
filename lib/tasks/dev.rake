@@ -87,7 +87,7 @@ namespace :dev do
 end
 
 namespace :transfer do
-  task :trasfer_vote => :environment do
+  task :transfer_vote => :environment do
     RawVote.all.each do |r|
 
       Vote.create(  :url => r[:url],
@@ -98,7 +98,7 @@ namespace :transfer do
     end
   end  
 
-  task :trasfer_legislator_8 => :environment do
+  task :transfer_legislator_8 => :environment do
     RawLegislator.where(:ad => 8).each do |r|
 
       Legislator.create(  :url => r[:url],
@@ -114,6 +114,29 @@ namespace :transfer do
                           :image => r[:image])
     end
   end  
+
+  task :transfer_legislator_vote => :environment do
+    
+    Legislator.all.each do |le|
+      legislator_id = le.id
+      puts le.id
+      raw_datas = RawLegislatorVote.where(:legislator => le.url)
+
+      raw_datas.all.each do |r|
+        if Vote.find_by_url(r.vote) != nil
+          vote_id = Vote.find_by_url(r.vote).id
+        end
+
+        LegislatorVoteShip.create(  :legislator_id => legislator_id,
+                                    :vote_id => vote_id,
+                                    :decision => r[:decision],
+                                    :conflict => r[:conflict])
+
+        
+      end
+    end
+  end  
+
 
 
 
