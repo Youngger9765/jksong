@@ -11,7 +11,16 @@
   <tr>
     <td>相關法案：</td>
   </tr>
+
+  <tr>
+    <td>你的表態：<%=  @p.try(:decision) %></td> 
+  </tr>
 </table>
+
+
+<%= link_to "贊成", user_votting_issue_path(@issue, :votting => "yes"),:class => "btn btn-success"%>
+<%= link_to "反對", user_votting_issue_path(@issue, :votting => "no"),:class => "btn btn-danger"%>
+<%= link_to "不表態", user_votting_issue_path(@issue, :votting => "clean"),:class => "btn btn-default"%>
 
 
 

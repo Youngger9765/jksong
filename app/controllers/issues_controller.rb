@@ -12,6 +12,7 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.find(params[:id])
+    @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
     
   end
 
@@ -48,6 +49,47 @@ class IssuesController < ApplicationController
     redirect_to :back
   end
 
+  def user_votting
+
+    @issue = Issue.find(params[:id])
+    @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
+
+    if current_user && !current_user.profile.vote_issue?(@issue)
+      ProfileIssueShip.create(:profile_id => current_user.profile.id, :issue_id => @issue.id, :decision => 0)
+
+      if params[:votting] == "yes"
+        @p.update(:decision => 1)
+      elsif params[:votting] == "no"
+        @p.update(:decision => -1)
+      elsif params[:votting] == "clean"
+        @p.update(:decision => 0)
+      else
+
+      end
+
+      flash[:notice] = "vote_finish"
+      redirect_to issue_path(params[:id])  
+
+    elsif current_user && current_user.profile.vote_issue?(@issue)
+      @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
+      if params[:votting] == "yes"
+        @p.update(:decision => 1)
+        flash[:alert] = "更新為贊成"
+      elsif params[:votting] == "no"
+        @p.update(:decision => -1)
+        flash[:alert] = "更新為反對"
+      elsif params[:votting] == "clean"
+        @p.update(:decision => 0)
+        flash[:alert] = "更新為不表態"
+      else
+
+      end
+      
+      redirect_to issue_path(params[:id]) 
+
+    end   
+
+  end
 
 
   private
@@ -55,6 +97,7 @@ class IssuesController < ApplicationController
   def issue_params
     params.require(:issue).permit(:content, :name, :category_id)
   end
+
 
 
 end

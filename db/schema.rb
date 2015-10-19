@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017161849) do
+ActiveRecord::Schema.define(version: 20151019063741) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -68,6 +68,32 @@ ActiveRecord::Schema.define(version: 20151017161849) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "profile_issue_ships", force: :cascade do |t|
+    t.integer  "profile_id", limit: 4
+    t.integer  "issue_id",   limit: 4
+    t.string   "decision",   limit: 255
+    t.string   "conflict",   limit: 255, default: "false"
+    t.string   "like",       limit: 255, default: "false"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "profile_issue_ships", ["issue_id"], name: "index_profile_issue_ships_on_issue_id", using: :btree
+  add_index "profile_issue_ships", ["profile_id"], name: "index_profile_issue_ships_on_profile_id", using: :btree
+
+  create_table "profile_vote_ships", force: :cascade do |t|
+    t.integer  "profile_id", limit: 4
+    t.integer  "vote_id",    limit: 4
+    t.string   "decision",   limit: 255
+    t.string   "conflict",   limit: 255, default: "false"
+    t.string   "like",       limit: 255, default: "false"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "profile_vote_ships", ["profile_id"], name: "index_profile_vote_ships_on_profile_id", using: :btree
+  add_index "profile_vote_ships", ["vote_id"], name: "index_profile_vote_ships_on_vote_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",    limit: 255

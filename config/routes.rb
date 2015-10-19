@@ -7,14 +7,15 @@ Rails.application.routes.draw do
   
 
   resources :profiles
-  resources :issues
-  resources :votes
 
-  resources :categories do
-    resources :issues do
-      resources :votes
+  resources :issues do
+    member do
+      get :user_votting
+
     end
   end
+
+  resources :votes
 
   namespace :admin do
     resources :users
