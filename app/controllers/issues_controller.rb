@@ -1,12 +1,8 @@
 class IssuesController < ApplicationController
 
   def index
-    if params[:category_id]
-      @issues = Issue.where(:category_id => params[:category_id])
 
-    else
-      @issues = Issue.all
-    end
+      @issues = Issue.page(params[:page]).per(5)
 
   end
 
@@ -53,6 +49,7 @@ class IssuesController < ApplicationController
 
     @issue = Issue.find(params[:id])
     @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
+
 
     if current_user && !current_user.profile.vote_issue?(@issue)
       ProfileIssueShip.create(:profile_id => current_user.profile.id, :issue_id => @issue.id, :decision => 0)

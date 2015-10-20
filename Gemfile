@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "kaminari"
+
 gem 'select2-rails'
 
 gem 'rest-client'
