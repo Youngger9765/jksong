@@ -1,0 +1,29 @@
+<h1> profile_issues_result </h1>
+
+
+
+<table class="table">
+  <tr>
+    <td>議題名稱</td>
+    <td>議題分類</td> 
+    <td>個人投票</td>
+    <td>所有投票結果</td>
+
+  </tr>
+
+  <% @issues.each do |i| %> 
+  <tr>
+    <td><%= link_to i.name, issue_path(i) %></td>
+    <td><%= i.category.name%></td>
+    <td><%= @profile_issue_ships.find_by_issue_id(i.id).decision%></td>
+    <td>
+    贊成：<%= @profile_issue_ships.where("issue_id = ? AND decision = ? ", i.id, 1 ).size%>
+    反對：<%= @profile_issue_ships.where("issue_id = ? AND decision = ? ", i.id, -1 ).size%>
+    </td>
+  </tr>
+  <% end %>
+
+
+</table>
+
+<%= link_to "想審更多法案嗎？", issues_path, :class => "btn btn-default"%>
