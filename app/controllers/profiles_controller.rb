@@ -19,6 +19,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def profile_issue_result
+    @profile = current_user.profile
+    @issues = @profile.votting_issues
+    @profile_issue_ships = ProfileIssueShip.where(:profile_id => @profile.id)
+  end
+  
+
+
+
   private
 
   def profile_params

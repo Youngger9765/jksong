@@ -6,7 +6,14 @@ Rails.application.routes.draw do
 
   
 
-  resources :profiles
+  resources :profiles do
+    member do
+      get :profile_issue_result
+      get :all_issue_result
+      get :legislator_radar
+      get :profile_legislator_ships
+    end  
+  end  
 
   resources :issues do
     member do
