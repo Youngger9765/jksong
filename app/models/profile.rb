@@ -10,6 +10,9 @@ class Profile < ActiveRecord::Base
     has_many :profile_issue_ships
     has_many :votting_issues, :through => :profile_issue_ships, :source => :issue
 
+    has_many :profile_legislator_ships
+    has_many :legislators, :through => :profile_legislator_ships
+
     def admin?
       self.role == "admin"
     end
@@ -17,5 +20,8 @@ class Profile < ActiveRecord::Base
     def vote_issue?(issue)
       self.votting_issues.include?(issue)
     end
+
+
+
 
 end

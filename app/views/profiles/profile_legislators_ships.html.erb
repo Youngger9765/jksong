@@ -1,0 +1,33 @@
+<h1>你跟立委的相似度</h1>
+
+
+
+<ul>
+  <% @issues.each do |i|%>
+  <li><%= i.name %>, 你的表態<%= profile_issue_decision(@profile.id, i.id) %></li>
+  
+
+  <li>
+    目前有多少立委：
+    <% @legislator.each do |le|%>
+      <li><%= le.name%></li>
+      <%a = 0%>
+      <% i.votes.each do|v|%>
+        
+        <li> 
+        <%if LegislatorVoteShip.where("legislator_id = ? AND vote_id = ?",le.id,v.id ).first.try(:decision).to_i == -1%>
+          <% a = a+ 1 %>
+        <%end %>
+        </li>
+        
+      <%end%>
+      <%=a%>
+      
+        
+    <% end %>  
+  </li>
+
+  <% end %>
+</ul>
+
+

@@ -9,14 +9,16 @@ Rails.application.routes.draw do
   resources :profiles do
     member do
       get :profile_issues_result
-      get :legislators_radar
-      get :profile_legislator_ships
+      get :profile_legislators_ships
     end  
+    resources :legislators
+
   end  
 
   resources :issues do
     member do
       get :user_votting
+      get :user_votting_destroy
 
     end
   end

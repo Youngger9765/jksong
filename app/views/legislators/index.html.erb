@@ -1,0 +1,13 @@
+<h1>Legislator list</h1>
+
+<table class="table">
+  
+  <% @legislators.each do |le| %>
+    
+    <tr>
+      <td><%= link_to le.name, profile_legislator_path(@profile, le)%></td>
+    </tr>
+
+  <%end%>
+
+</table>

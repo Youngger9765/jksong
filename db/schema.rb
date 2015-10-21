@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019063741) do
+ActiveRecord::Schema.define(version: 20151021081123) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -83,6 +83,22 @@ ActiveRecord::Schema.define(version: 20151019063741) do
 
   add_index "profile_issue_ships", ["issue_id"], name: "index_profile_issue_ships_on_issue_id", using: :btree
   add_index "profile_issue_ships", ["profile_id"], name: "index_profile_issue_ships_on_profile_id", using: :btree
+
+  create_table "profile_legislator_ships", force: :cascade do |t|
+    t.integer  "profile_id",    limit: 4
+    t.integer  "legislator_id", limit: 4
+    t.integer  "total",         limit: 4
+    t.integer  "law",           limit: 4
+    t.integer  "education",     limit: 4
+    t.integer  "social",        limit: 4
+    t.integer  "traffic",       limit: 4
+    t.integer  "diplomacy",     limit: 4
+    t.integer  "finance",       limit: 4
+    t.integer  "economy",       limit: 4
+    t.integer  "interior",      limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "profile_vote_ships", force: :cascade do |t|
     t.integer  "profile_id", limit: 4

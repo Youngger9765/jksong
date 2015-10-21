@@ -1,0 +1,25 @@
+<h1>Legislator Show</h1>
+<h3><%= @legislator.name%></h3>
+
+
+<table class="table">
+  <tr>
+    <td>法案議題</td> 
+    <td>法案id</td>
+    <td>表態</td>
+
+  </tr>
+  
+  <% @votes.each do |v|%>
+    <tr>
+      <td>
+        <% v.relative_issues.each do |i|%>
+          <%= i.name%>
+        <% end %>
+      </td>
+      <td><%= v.uid%></td>
+      <td><%= legislator_vote_decision(@legislator.id, v.id)%></td>  
+    </tr>
+  <% end %>
+
+</table>

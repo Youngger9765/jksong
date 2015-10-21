@@ -46,29 +46,53 @@ class IssuesController < ApplicationController
   end
 
   def user_votting
-
+    @legislators = Legislator.all
+    @profile = current_user.profile    
     @issue = Issue.find(params[:id])
     @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
+    @profile_legislator_ship = ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(@legislator)
 
-
+    
     if current_user && !current_user.profile.vote_issue?(@issue)
-      ProfileIssueShip.create(:profile_id => current_user.profile.id, :issue_id => @issue.id, :decision => 0)
+      
+      ProfileIssueShip.create(:profile_id => current_user.profile.id, :issue_id => @issue.id)
+      @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
 
-      if params[:votting] == "yes"
+      if params[:votting] == "yes" 
         @p.update(:decision => 1)
+
       elsif params[:votting] == "no"
         @p.update(:decision => -1)
-      elsif params[:votting] == "clean"
-        @p.update(:decision => 0)
       else
+        @p.update(:decision => 0)
+      end
+      flash[:notice] = "vote_finish"
 
+      @issue.votes.each do |v|
+        @legislators.each do |le|
+
+          if !ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+            
+            if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+              ProfileLegislatorShip.create(:profile_id => current_user.profile.id, :legislator_id =>le.id, :total => 1)  
+            end
+
+          elsif ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+
+            if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+              a = ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(le.id)[:total] 
+              a += 1
+              ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(le.id).update(:total => a)
+            end  
+          end
+
+        end  
       end
 
-      flash[:notice] = "vote_finish"
-      redirect_to issue_path(params[:id])  
-
+    
     elsif current_user && current_user.profile.vote_issue?(@issue)
       @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
+      
       if params[:votting] == "yes"
         @p.update(:decision => 1)
         flash[:alert] = "更新為贊成"
@@ -81,11 +105,45 @@ class IssuesController < ApplicationController
       else
 
       end
-      
-      redirect_to issue_path(params[:id]) 
+
+      @issue.votes.each do |v|
+        @legislators.each do |le|
+
+          if !ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+            
+            if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+              ProfileLegislatorShip.create(:profile_id => current_user.profile.id, :legislator_id =>le.id, :total => 1)
+            end
+
+          elsif ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+
+            if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+              a = ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(le.id)[:total] 
+              a += 1
+              ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(le.id).update(:total => a)
+              
+            elsif LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == (@p.decision.to_i * -1).to_s
+              a = ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(le.id)[:total] 
+              a -= 1
+              ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(le.id).update(:total => a)
+              
+            end
+
+          end
+
+        end  
+      end
+
 
     end   
+      redirect_to issue_path(params[:id])
+  end
 
+  def user_votting_destroy
+    @issue = Issue.find(params[:id])
+    ProfileLegislatorShip.destroy_all
+    ProfileIssueShip.where(:profile_id => current_user.profile.id, :issue_id => @issue.id).destroy_all
+    redirect_to issue_path(params[:id])
   end
 
 
