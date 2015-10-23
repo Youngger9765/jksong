@@ -24,7 +24,7 @@
   </tr>
 
   <tr>
-    <td>你的表態：<%=  @p.try(:decision) %></td> 
+    <td>你的表態：<%=  @profile_issue.try(:decision) %></td> 
   </tr>
 
 </table>
@@ -37,9 +37,9 @@
 <%= link_to "clear", user_votting_destroy_issue_path(@issue, :votting => "destroy"),:class => "btn btn-default"%>
 
 
-<h1>誰跟你最像：
+<h1>跟你最相像的立委：
   
-  <% @liking_legislators.each do |le|%>
+  <% @related_legislators.each do |le|%>
     <li>
     <%= le.name%>
     <%= legislator_total_score(le.id)%>

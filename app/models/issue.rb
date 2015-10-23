@@ -22,8 +22,9 @@ class Issue < ActiveRecord::Base
         vote = Vote.find_by_uid(v)
         vote
       end
-      
     end
+
+    
 
 
 

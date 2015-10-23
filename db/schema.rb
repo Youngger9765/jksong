@@ -87,17 +87,17 @@ ActiveRecord::Schema.define(version: 20151021081123) do
   create_table "profile_legislator_ships", force: :cascade do |t|
     t.integer  "profile_id",    limit: 4
     t.integer  "legislator_id", limit: 4
-    t.integer  "total",         limit: 4
-    t.integer  "law",           limit: 4
-    t.integer  "education",     limit: 4
-    t.integer  "social",        limit: 4
-    t.integer  "traffic",       limit: 4
-    t.integer  "diplomacy",     limit: 4
-    t.integer  "finance",       limit: 4
-    t.integer  "economy",       limit: 4
-    t.integer  "interior",      limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "total",         limit: 4, default: 0
+    t.integer  "law",           limit: 4, default: 0
+    t.integer  "education",     limit: 4, default: 0
+    t.integer  "social",        limit: 4, default: 0
+    t.integer  "traffic",       limit: 4, default: 0
+    t.integer  "diplomacy",     limit: 4, default: 0
+    t.integer  "finance",       limit: 4, default: 0
+    t.integer  "economy",       limit: 4, default: 0
+    t.integer  "interior",      limit: 4, default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "profile_vote_ships", force: :cascade do |t|

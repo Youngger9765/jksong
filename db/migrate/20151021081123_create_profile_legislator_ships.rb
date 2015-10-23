@@ -4,15 +4,15 @@ class CreateProfileLegislatorShips < ActiveRecord::Migration
       
       t.integer :profile_id
       t.integer :legislator_id
-      t.integer :total
-      t.integer :law
-      t.integer :education
-      t.integer :social
-      t.integer :traffic
-      t.integer :diplomacy
-      t.integer :finance
-      t.integer :economy
-      t.integer :interior
+      t.integer :total, default: 0
+      t.integer :law, default: 0
+      t.integer :education, default: 0
+      t.integer :social, default: 0
+      t.integer :traffic, default: 0
+      t.integer :diplomacy, default: 0
+      t.integer :finance, default: 0
+      t.integer :economy, default: 0
+      t.integer :interior, default: 0
       t.timestamps null: false
     end
   end
