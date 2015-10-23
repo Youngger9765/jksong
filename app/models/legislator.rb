@@ -6,4 +6,6 @@ class Legislator < ActiveRecord::Base
   has_many :profile_legislator_ships
   has_many :profiles, :through => :profile_legislator_ships
 
+  
+
 end

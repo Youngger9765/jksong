@@ -4,6 +4,10 @@
   <tr>
     <td>議題名稱： <%= @issue.name %></td>
   </tr>
+
+  <tr>
+    <td>議題類型： <%= @issue.category.name %></td>
+  </tr>
   
   <tr>
     <td>議題內容： <%= @issue.content %></td>
@@ -31,6 +35,22 @@
 <%= link_to "不表態", user_votting_issue_path(@issue, :votting => "clean"),:class => "btn btn-default"%>
 
 <%= link_to "clear", user_votting_destroy_issue_path(@issue, :votting => "destroy"),:class => "btn btn-default"%>
+
+
+<h1>誰跟你最像：
+  
+  <% @liking_legislators.each do |le|%>
+    <li>
+    <%= le.name%>
+    <%= legislator_total_score(le.id)%>
+    </li>
+  <% end %>
+  
+</h1>
+
+
+
+
 
 
 

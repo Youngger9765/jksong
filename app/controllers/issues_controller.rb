@@ -9,7 +9,8 @@ class IssuesController < ApplicationController
   def show
     @issue = Issue.find(params[:id])
     @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
-    
+    @liking_legislators = Legislator.joins(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => current_user.profile.id}).order("total DESC")
+
   end
 
   def new
