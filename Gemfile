@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'capistrano-rails', :group => :development
+gem 'capistrano-passenger', :group => :development
+
 gem "kaminari"
 
 gem 'select2-rails'

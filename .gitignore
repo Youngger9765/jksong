@@ -6,8 +6,10 @@
 
 /public/system
 
-/config/initializers/devise.rb
 
+/config/fb.yml
+/config/database.yml
+/config/secrets.yml
 
 # Ignore bundler config.
 /.bundle
