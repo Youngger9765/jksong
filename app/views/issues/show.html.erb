@@ -30,9 +30,9 @@
 </table>
 
 
-<%= link_to "贊成", user_votting_issue_path(@issue, :votting => "yes"),:class => "btn btn-success"%>
-<%= link_to "反對", user_votting_issue_path(@issue, :votting => "no"),:class => "btn btn-danger"%>
-<%= link_to "不表態", user_votting_issue_path(@issue, :votting => "clean"),:class => "btn btn-default"%>
+<%= link_to "贊成", user_votting_issue_path(@issue, :votting => "yes", :category => @issue.category.english_name),:class => "btn btn-success"%>
+<%= link_to "反對", user_votting_issue_path(@issue, :votting => "no", :category => @issue.category.english_name),:class => "btn btn-danger"%>
+<%= link_to "不表態", user_votting_issue_path(@issue, :votting => "clean", :category => @issue.category.english_name),:class => "btn btn-default"%>
 
 <%= link_to "clear", user_votting_destroy_issue_path(@issue, :votting => "destroy"),:class => "btn btn-default"%>
 
