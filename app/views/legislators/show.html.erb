@@ -4,22 +4,26 @@
 
 <table class="table">
   <tr>
-    <td>法案議題</td> 
-    <td>法案id</td>
-    <td>表態</td>
+    <td>人氣指數</td>
+    <td>各領域吸票程度</td>
+  </tr> 
+  <tr>
+    <td>
+      <%= @legislator.total_score(@legislator_score_table) %>
+    </td>
+    <td>
+      Law: <%= @legislator.law_score(@legislator_score_table)%>
+      diplomacy: <%= @legislator.diplomacy_score(@legislator_score_table)%>
+      interior: <%= @legislator.interior_score(@legislator_score_table)%>
+      finance: <%= @legislator.finance_score(@legislator_score_table)%>
+      economy: <%= @legislator.economy_score(@legislator_score_table)%>
+      traffic: <%= @legislator.traffic_score(@legislator_score_table)%>
+      education: <%= @legislator.education_score(@legislator_score_table)%>
+      social: <%= @legislator.social_score(@legislator_score_table)%>
+    </td>
+
 
   </tr>
   
-  <% @votes.each do |v|%>
-    <tr>
-      <td>
-        <% v.relative_issues.each do |i|%>
-          <%= i.name%>
-        <% end %>
-      </td>
-      <td><%= v.uid%></td>
-      <td><%= legislator_vote_decision(@legislator.id, v.id)%></td>  
-    </tr>
-  <% end %>
 
 </table>

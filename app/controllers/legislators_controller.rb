@@ -8,7 +8,9 @@ class LegislatorsController < ApplicationController
   def show
     @profile = Profile.find(params[:profile_id])
     @legislator = Legislator.find(params[:id])
-    @votes = Legislator.find(params[:id]).votes  
+    @votes = Legislator.find(params[:id]).votes
+    @legislator_score_table = ProfileLegislatorShip.where(:legislator_id => params[:id])
+
   end
   
 

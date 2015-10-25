@@ -5,9 +5,7 @@
 <%= form_for @profile, :url => profile_path(@profile), :method => :patch do |f|%>
 
 <table class="table">
-    <tr>
-      <td>暱稱： <%= @profile.username  %></td>
-    </tr>  
+
     <tr> 
       <td>   
         <div class="form-group">
@@ -17,9 +15,6 @@
       </td>
     </tr>
 
-    <tr>
-      <td>性別： <%= @profile.try(:bio)  %> </td>
-    </tr> 
     <tr>
       <td>
         <div class="form-group">
@@ -31,9 +26,6 @@
     <tr>
     
     <tr>
-      <td>職業： <%= @profile.occupation %> </td>
-    </tr> 
-    <tr>
       <td>
         <div class="form-group">
           <%= f.label :occupation, "職業" %>
@@ -43,9 +35,6 @@
     </tr>
     
     <tr>
-      <td>居住地： <%= @profile.location.try( :name ) %> </td>
-    </tr> 
-    <tr>
       <td>
         <div class="form-group">
           <%= f.label :location_id, "地區" %>
@@ -54,13 +43,6 @@
       </td>
     </tr>
 
-    <tr>
-      <td>註冊時間： <%= @profile.created_at  %> </td>
-    </tr> 
-
-    <tr>
-      <td>角色： <%= @profile.role  %></td>
-    </tr> 
 </table>
 
     <%= f.submit "送出",:class => "btn btn-primary" %>

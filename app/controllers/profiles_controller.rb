@@ -25,6 +25,8 @@ class ProfilesController < ApplicationController
   def profile_legislators_ships
     @legislator = Legislator.all
     @issues = @profile.votting_issues
+    @related_legislators = Legislator.joins(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => current_user.profile.id}).order("total DESC")
+
   end
 
 
