@@ -37,12 +37,16 @@
 <%= link_to "clear", user_votting_destroy_issue_path(@issue, :votting => "destroy"),:class => "btn btn-default"%>
 
 
-<h1>跟你最相像的立委：
+<h1>num : <%= @issue.profile_vote_number(current_user) %> </h1>
+
+
+<h1>目前跟你最相像的立委：
   
   <% @related_legislators.each do |le|%>
     <li>
     <%= le.name%>
-    <%= legislator_total_score(le.id)%>
+
+    <%= ((legislator_total_score(le.id).to_f)/(@profile.vote_number.to_f)*100).round(2)%>%
     </li>
   <% end %>
   

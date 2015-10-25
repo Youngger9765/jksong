@@ -21,6 +21,15 @@ class Profile < ActiveRecord::Base
       self.votting_issues.include?(issue)
     end
 
+    def profile_total_vote_issue_number_calculation(user,number)
+      user.profile[:vote_number] += number
+      user.profile[:issue_number]+= 1
+      user.profile.save
+    end
+    
+
+    
+
 
 
 

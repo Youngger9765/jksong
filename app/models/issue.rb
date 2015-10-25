@@ -46,6 +46,19 @@ class Issue < ActiveRecord::Base
         ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id).update(:total => total_score)
 
     end
+
+    def profile_vote_number(user)
+      total_number = 0
+      user.profile.votting_issues.each do |issue|
+        vote_number = issue.votes.size
+        total_number += vote_number
+      end
+      
+      total_number
+
+    end
+
+    
     
 
 

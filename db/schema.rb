@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024041841) do
+ActiveRecord::Schema.define(version: 20151025031446) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -115,15 +115,17 @@ ActiveRecord::Schema.define(version: 20151024041841) do
   add_index "profile_vote_ships", ["vote_id"], name: "index_profile_vote_ships_on_vote_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "username",    limit: 255
-    t.integer  "user_id",     limit: 4
-    t.integer  "location_id", limit: 4,   default: 0
-    t.string   "status",      limit: 255, default: "未填寫"
-    t.string   "role",        limit: 255, default: "normal"
-    t.string   "bio",         limit: 255, default: "未填寫"
-    t.string   "occupation",  limit: 255, default: "未填寫"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.string   "username",     limit: 255
+    t.integer  "user_id",      limit: 4
+    t.integer  "location_id",  limit: 4,   default: 0
+    t.string   "status",       limit: 255, default: "未填寫"
+    t.string   "role",         limit: 255, default: "normal"
+    t.string   "bio",          limit: 255, default: "未填寫"
+    t.string   "occupation",   limit: 255, default: "未填寫"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "vote_number",  limit: 4,   default: 0
+    t.integer  "issue_number", limit: 4,   default: 0
   end
 
   add_index "profiles", ["location_id"], name: "index_profiles_on_location_id", using: :btree

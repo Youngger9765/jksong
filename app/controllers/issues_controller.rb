@@ -10,7 +10,7 @@ class IssuesController < ApplicationController
     @issue = Issue.find(params[:id])
     @profile_issue = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
     @related_legislators = Legislator.joins(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => current_user.profile.id}).order("total DESC")
-
+    @profile = current_user.profile
   end
 
   def new
@@ -56,8 +56,12 @@ class IssuesController < ApplicationController
     @category_english_name = params[:category]
 
     
+
+    
     if current_user && !current_user.profile.vote_issue?(@issue)
-      
+
+      @profile.profile_total_vote_issue_number_calculation(current_user,@issue.votes.count)
+
       ProfileIssueShip.create(:profile_id => current_user.profile.id, :issue_id => @issue.id)
       @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
 
@@ -120,17 +124,20 @@ class IssuesController < ApplicationController
 
             elsif LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == (@p.decision.to_i * -1).to_s
               @issue.legislator_category_score_subtraction(current_user.profile.id, le, @category_english_name)          
-              
+
             end
 
           end
 
         end  
       end
-
-
     end   
-      redirect_to issue_path(params[:id])
+
+
+    redirect_to issue_path(params[:id])
+      
+      
+
       
   end
 
