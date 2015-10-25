@@ -10,7 +10,6 @@ class Admin::UsersController < ApplicationController
 
   def index
     @profiles = Profile.all
-    
   end
 
   def edit
@@ -18,14 +17,14 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    User.profile.find(params[:id]).update(user_params)
+    Profile.find(params[:id]).update(profile_params)
     flash[:notice] = "Update Success!"
     redirect_to admin_users_path   
   end
 
   private
 
-  def user_params
+  def profile_params
     params.require(:profile).permit(:role)
   end
 

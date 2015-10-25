@@ -87,11 +87,8 @@ class IssuesController < ApplicationController
             if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
                @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
             end 
-
           end
-
         end
-
       end
 
     elsif current_user && current_user.profile.vote_issue?(@issue)
@@ -124,6 +121,7 @@ class IssuesController < ApplicationController
 
           end  
         end
+
         @p.update(:decision => "1")
         flash[:alert] = "更新為贊成"
 
@@ -152,6 +150,7 @@ class IssuesController < ApplicationController
 
           end  
         end
+
         @p.update(:decision => "-1")
         flash[:alert] = "更新為反對"
 
@@ -181,18 +180,13 @@ class IssuesController < ApplicationController
           end  
         end
 
-
-
         @p.update(:decision => "0")
         flash[:alert] = "更新為不表態"
       end
- 
-      
+
     end   
 
     redirect_to issue_path(params[:id])
-      
-
       
   end
 

@@ -6,11 +6,21 @@
     <tr>
       <td>姓名</td>
       <td>地點</td> 
+      <td>權限</td>
     </tr>
   <% @profiles.each do |p|%>  
     <tr>
-      <td><%= p.username %></td>
+      <td><%= link_to p.username, admin_user_path(p) %></td>
       <td><%= p.location.try(:name) %></td>
+      <td>
+        <%= form_for p, url: admin_user_path(p), :method => :PATCH , :class => "form" do |p|%>
+
+          <div class="form-group">
+            <%=p.select :role, [["admin","admin"],["normal","normal"]], :class => "form-control"%>
+            <%=p.submit "Update", :class => "btn btn-primary"%>
+          </div>
+        <%end%>
+      </td>
     </tr>
   <% end %>
 

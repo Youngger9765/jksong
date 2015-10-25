@@ -33,13 +33,23 @@
             <%= flash[:alert]%>
           </div>
         <% end %>
+        
+        <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
+        <% if current_user %>
+          <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
+        <% end %>
+        <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
+
+        <% if current_user && current_user.admin? %>
+          <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
+        <% end %>
+
+        <hr>
+
         <%= link_to "管理分類", admin_categories_path,:class => "btn btn-default"%>
         <%= link_to "管理議題", admin_issues_path,:class => "btn btn-default"%>
         <%= link_to "管理法案", admin_votes_path,:class => "btn btn-default"%>
         <%= link_to "管理使用者", admin_users_path,:class => "btn btn-default"%>
-        <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
-        <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
-        <%= link_to "投票首頁", issues_path ,:class => "btn btn-default"%>
 
 <%= yield %>
 
