@@ -4,7 +4,7 @@ class CreateLegislatorVoteShips < ActiveRecord::Migration
 
       t.integer :legislator_id
       t.integer :vote_id
-      t.string :decision
+      t.string :decision, default: 0
       t.string :conflict, :default =>"false"
 
       t.timestamps null: false

@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20151025031446) do
-
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -43,7 +41,7 @@ ActiveRecord::Schema.define(version: 20151025031446) do
   create_table "legislator_vote_ships", force: :cascade do |t|
     t.integer  "legislator_id", limit: 4
     t.integer  "vote_id",       limit: 4
-    t.string   "decision",      limit: 255
+    t.string   "decision",      limit: 255, default: "0"
     t.string   "conflict",      limit: 255, default: "false"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false

@@ -54,8 +54,6 @@ class IssuesController < ApplicationController
     @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
     @profile_legislator_ship = ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(@legislator)
     @category_english_name = params[:category]
-
-
     
     if current_user && !current_user.profile.vote_issue?(@issue)
 
@@ -65,13 +63,13 @@ class IssuesController < ApplicationController
       @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
 
       if params[:votting] == "yes" 
-        @p.update(:decision => 1)
-
+        @p.update(:decision => "1")
       elsif params[:votting] == "no"
-        @p.update(:decision => -1)
-      else
-        @p.update(:decision => 0)
+        @p.update(:decision => "-1")
+      elsif params[:votting] == "pass"
+        @p.update(:decision => "0")
       end
+
       flash[:notice] = "vote_finish"
 
       @issue.votes.each do |v|
@@ -79,7 +77,7 @@ class IssuesController < ApplicationController
 
           if !ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
             
-            if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision             
+            if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
               ProfileLegislatorShip.create(:profile_id => current_user.profile.id, :legislator_id =>le.id, :total => 0)                 
               @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
             end
@@ -97,40 +95,99 @@ class IssuesController < ApplicationController
       end
 
     elsif current_user && current_user.profile.vote_issue?(@issue)
-      @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
       
+      @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
+
       if params[:votting] == "yes"
-        @p.update(:decision => 1)
-        flash[:alert] = "更新為贊成"
-      elsif params[:votting] == "no"
-        @p.update(:decision => -1)
-        flash[:alert] = "更新為反對"
-      elsif params[:votting] == "clean"
-        @p.update(:decision => 0)
-        flash[:alert] = "更新為不表態"
-      else
+        @issue.votes.each do |v|
+          @legislators.each do |le|
 
-      end
+            if ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
 
-      @issue.votes.each do |v|
-        @legislators.each do |le|
+              if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+                @issue.legislator_category_score_subtraction(current_user.profile.id, le, @category_english_name)  
+              
+              elsif LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == "1"
+                @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
+                
 
-          if ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+              end
 
-            if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
-
-              @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
-
-            elsif LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == (@p.decision.to_i * -1).to_s
-
-              @issue.legislator_category_score_subtraction(current_user.profile.id, le, @category_english_name)          
-
+            elsif !ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+            
+              if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == "1"
+                ProfileLegislatorShip.create(:profile_id => current_user.profile.id, :legislator_id =>le.id)                 
+                @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
+              end
+                  
             end
 
-          end
+          end  
+        end
+        @p.update(:decision => "1")
+        flash[:alert] = "更新為贊成"
 
-        end  
+      elsif params[:votting] == "no"
+        @issue.votes.each do |v|
+          @legislators.each do |le|
+
+            if ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+
+              if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+                @issue.legislator_category_score_subtraction(current_user.profile.id, le, @category_english_name)  
+              
+              elsif LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == "-1"
+                @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
+              
+              end
+
+            elsif !ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+            
+              if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == "-1"
+                ProfileLegislatorShip.create(:profile_id => current_user.profile.id, :legislator_id =>le.id)                 
+                @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
+              end
+                  
+            end
+
+          end  
+        end
+        @p.update(:decision => "-1")
+        flash[:alert] = "更新為反對"
+
+      elsif params[:votting] == "pass"
+        @issue.votes.each do |v|
+          @legislators.each do |le|
+
+            if ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+
+              if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+                @issue.legislator_category_score_subtraction(current_user.profile.id, le, @category_english_name)  
+              
+              elsif LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == "0"
+                @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
+              
+              end
+
+            elsif !ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
+            
+              if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == "0"
+                ProfileLegislatorShip.create(:profile_id => current_user.profile.id, :legislator_id =>le.id)                 
+                @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
+              end
+                  
+            end
+
+          end  
+        end
+
+
+
+        @p.update(:decision => "0")
+        flash[:alert] = "更新為不表態"
       end
+ 
+      
     end   
 
     redirect_to issue_path(params[:id])
