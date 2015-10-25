@@ -47,6 +47,7 @@ class Issue < ActiveRecord::Base
 
     end
 
+
     def profile_vote_number(user)
       total_number = 0
       user.profile.votting_issues.each do |issue|
@@ -58,7 +59,6 @@ class Issue < ActiveRecord::Base
 
     end
 
-    
     
 
 

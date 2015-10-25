@@ -55,7 +55,6 @@ class IssuesController < ApplicationController
     @profile_legislator_ship = ProfileLegislatorShip.where(:profile_id => current_user.profile.id).find_by_legislator_id(@legislator)
     @category_english_name = params[:category]
 
-    
 
     
     if current_user && !current_user.profile.vote_issue?(@issue)
@@ -97,7 +96,6 @@ class IssuesController < ApplicationController
 
       end
 
-    
     elsif current_user && current_user.profile.vote_issue?(@issue)
       @p = ProfileIssueShip.where(:profile_id => current_user.profile.id).find_by_issue_id(@issue)
       
@@ -120,9 +118,11 @@ class IssuesController < ApplicationController
           if ProfileLegislatorShip.where(:profile_id => current_user.profile.id, :legislator_id =>le.id).first
 
             if LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == @p.decision
+
               @issue.legislator_category_score_plus(current_user.profile.id, le, @category_english_name)  
 
             elsif LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id) && LegislatorVoteShip.where(:legislator_id => le.id).find_by_vote_id(v.id).decision == (@p.decision.to_i * -1).to_s
+
               @issue.legislator_category_score_subtraction(current_user.profile.id, le, @category_english_name)          
 
             end
@@ -133,9 +133,7 @@ class IssuesController < ApplicationController
       end
     end   
 
-
     redirect_to issue_path(params[:id])
-      
       
 
       
