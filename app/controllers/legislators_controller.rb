@@ -10,7 +10,6 @@ class LegislatorsController < ApplicationController
     @legislator = Legislator.find(params[:id])
     @votes = Legislator.find(params[:id]).votes
     @legislator_score_table = ProfileLegislatorShip.where(:legislator_id => params[:id])
-
   end
   
 
