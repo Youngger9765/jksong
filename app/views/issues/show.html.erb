@@ -1,37 +1,70 @@
 <h1><%= @issue.name %></h1>
 
-<table class="table">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>你的表態：<%=  personal_decision %> </h2>
 
-  <tr>
-    <td>議題類型： <%= @issue.category.name %></td>
-  </tr>
-  
-  <tr>
-    <td>議題內容： <%= @issue.content %></td>
-  </tr>
+    </div>
+    <div class="col-md-6">
+      <%= link_to "贊成", user_votting_issue_path(@issue, :votting => "yes", :category => @issue.category.english_name),:class => "btn btn-success btn-large"%>
+      <%= link_to "反對", user_votting_issue_path(@issue, :votting => "no", :category => @issue.category.english_name),:class => "btn btn-danger btn-large"%>
+      <%= link_to "不表態", user_votting_issue_path(@issue, :votting => "pass", :category => @issue.category.english_name),:class => "btn btn-default btn-large"%>
 
-  <tr>
-    <td>相關法案：<%= @issue.votes.count %></td>
-  </tr>
+      <%= link_to "clear", user_votting_destroy_issue_path(@issue, :votting => "destroy"),:class => "btn btn-default"%>  
 
-  <tr>
-    <% @issue.votes.each do |v| %>
-      <td> <%= link_to v.uid %> </td>
-    <% end %>
-  </tr>
+    </div>
+  </div>
 
-  <tr>
-    <td>你的表態：<%=  personal_decision %></td> 
-  </tr>
-
-</table>
+</div>
 
 
-<%= link_to "贊成", user_votting_issue_path(@issue, :votting => "yes", :category => @issue.category.english_name),:class => "btn btn-success"%>
-<%= link_to "反對", user_votting_issue_path(@issue, :votting => "no", :category => @issue.category.english_name),:class => "btn btn-danger"%>
-<%= link_to "不表態", user_votting_issue_path(@issue, :votting => "pass", :category => @issue.category.english_name),:class => "btn btn-default"%>
 
-<%= link_to "clear", user_votting_destroy_issue_path(@issue, :votting => "destroy"),:class => "btn btn-default"%>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="http://farm9.staticflickr.com/8448/7901449658_2bca50ca32.jpg" alt="" id="issues_photo" >
+
+    </div>
+
+    <div class="col-md-6">
+
+      <table class="table" id="issue_show_table">
+        <tr>
+          <td>議題類型： <%= @issue.category.name %></td>
+          </td>
+        </tr>  
+        <tr>
+          <td>議題內容： <%= @issue.content %></td>
+        </tr>
+        <tr>
+          <td>相關參考法案代碼：<%= @issue.votes.count %></td>
+        </tr>
+        <tr>
+          <td> 
+            <% @issue.votes.each do |v| %>
+              <li><%= link_to v.uid %> </li> 
+            <% end %>
+          </td>
+        </tr>
+      </table>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+
 
 
 <h1>num : <%= @profile.vote_number %> </h1>
