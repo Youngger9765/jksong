@@ -17,6 +17,15 @@ class Legislator < ActiveRecord::Base
     end
   end
 
+  def total_score_from(legislator_score_table)
+    ScoreService.total_score(legislator_score_table)
+  end
+
+  def total_score_from(legislator_score_table)
+    ScoreService.total_score(legislator_score_table)
+  end
+  
+
   # def total_score(legislator_scores)
   #   legislator_scores.to_a.sum(&:total)
   # end 

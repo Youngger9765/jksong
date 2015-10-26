@@ -9,17 +9,17 @@
   </tr> 
   <tr>
     <td>
-      <%= @legislator.total_score(@legislator_score_table) %>
+      <%= @legislator.total_score_from(@legislator_score_table) %>
     </td>
     <td>
-      Law: <%= @legislator.law_score(@legislator_score_table)%>
-      diplomacy: <%= @legislator.diplomacy_score(@legislator_score_table)%>
-      interior: <%= @legislator.interior_score(@legislator_score_table)%>
-      finance: <%= @legislator.finance_score(@legislator_score_table)%>
-      economy: <%= @legislator.economy_score(@legislator_score_table)%>
-      traffic: <%= @legislator.traffic_score(@legislator_score_table)%>
-      education: <%= @legislator.education_score(@legislator_score_table)%>
-      social: <%= @legislator.social_score(@legislator_score_table)%>
+      Law: <%= ScoreService.law_score(@legislator_score_table)%>
+      diplomacy: <%= ScoreService.diplomacy_score(@legislator_score_table)%>
+      interior: <%= ScoreService.interior_score(@legislator_score_table)%>
+      finance: <%= ScoreService.finance_score(@legislator_score_table)%>
+      economy: <%= ScoreService.economy_score(@legislator_score_table)%>
+      traffic: <%= ScoreService.traffic_score(@legislator_score_table)%>
+      education: <%= ScoreService.education_score(@legislator_score_table)%>
+      social: <%= ScoreService.social_score(@legislator_score_table)%>
     </td>
 
 
