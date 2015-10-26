@@ -2,7 +2,7 @@ class IssuesController < ApplicationController
 
   def index
 
-      @issues = Issue.page(params[:page]).per(5)
+      @issues = Issue.page(params[:page]).per(8)
 
   end
 
