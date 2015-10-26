@@ -8,24 +8,74 @@
 </head>
 <body>
 
+<div class="header">
+  <div class="container">
+    <h1><%= link_to "政客爽", root_path %></h1>
 
+    <p>那年，鄭克塽領導下降了滿清</p>
+    <p>今年，政客爽的台灣會有什麼後果？</p>    
+  </div>
+  
+</div>
+
+    <div class="clearfix"></div>
 
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook),:class => "btn btn-primary" %>
-      <% if current_user %>
-          <%= current_user.email%>
-          <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-          <%= link_to('修改密碼', edit_registration_path(:user)) %>
-      <% else %>
-          <%= link_to('註冊', new_registration_path(:user)) %> |
-          <%= link_to('登入', new_session_path(:user)) %>
-      <% end %>
 
-      <h1><%= link_to "政客爽", root_path %></h1>
-        <% if flash[:notice].present? %>
+  <div class="row">
+    <div class="col-md-12">  
+
+  
+      <div class="row">
+        <div class="col-md-6">       
+          <ul class="nav nav-tabs">
+            <li>
+              
+            </li>
+            <li class="active">
+              <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
+            </li>
+            <li>
+              <% if current_user %>
+                <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
+              <% end %>
+             </li>
+            <li>
+              <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
+            </li>
+            <li>
+              <% if current_user && current_user.admin? %>
+                <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
+              <% end %>
+            </li> 
+          </ul>         
+        </div>
+        
+        <div class="col-md-6" id="log_in_control_bar">
+          <div class="col-md-12">
+            <% if !current_user %>
+              <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook),:class => "btn btn-primary" %>
+            <%elsif%>
+            
+            <%end%>
+
+            <% if current_user %>
+                <%= current_user.profile.username%>
+                <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
+            <% else %>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+        
+
+
+        
+        
+     <% if flash[:notice].present? %>
           <div style = "color: green">
             <%= flash[:notice]%>
           </div>
@@ -36,28 +86,6 @@
             <%= flash[:alert]%>
           </div>
         <% end %>
-
-
-        <ul class="nav nav-tabs">
-          <li class="active">
-            <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
-          </li>
-          <li>
-            <% if current_user %>
-              <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
-            <% end %>
-           </li>
-          <li>
-            <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
-          </li>
-          <li>
-            <% if current_user && current_user.admin? %>
-              <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
-            <% end %>
-          </li> 
-        </ul>
-        
-     
     <%= yield %>
 
     </div>

@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body{
+  background: #ECF5FF;
+}
+
 
 #issues_photo{
   width:100%; 
@@ -14,10 +18,38 @@
   border-style:outset;
   text-align:center;
   background: pink;
-  margin:1%;
+  margin:2%;
 
 }
 
 td{
   font-size:20px;
 }
+
+
+
+
+.nav-tabs a{
+  font-family: "標楷體","Times New Roman",Georgia,Serif;
+  font-size: 150%;
+  line-height:center;
+}
+
+#log_in_control_bar{
+  text-align:center; 
+
+}
+
+#log_in_control_bar div{
+  font-size:200%;
+  font-family: "標楷體","Times New Roman",Georgia,Serif;
+  color: black;
+
+
+}
+
+
+
+
+
+
