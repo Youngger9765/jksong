@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "paperclip", "~> 4.3"
+
 gem 'capistrano-rails', :group => :development
 gem 'capistrano-passenger', :group => :development
 

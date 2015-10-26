@@ -2,7 +2,12 @@
 
 <table class="table">
   <%= @issue.name%>
-
+  <hr>
+  <% if @issue.logo.exists? %>
+    <%= link_to image_tag(@issue.logo.url(:thumb)),@issue.logo.url%>
+  <%end%>
+  <hr>
+  法案：
   <% @issue.votes.each do |v| %>
     <tr>
       <td><%=v.uid %></td>
@@ -34,6 +39,18 @@
     <%= f.label :vote_list , "法案" %>
     <%= f.select :vote_list, Vote.all.map{ |x| [x.uid, x.id]}, {}, :multiple => "true" , :class => "form-control" %>
   </div>
+
+  <div class="form-group">
+    <%=f.label :logo, "LOGO"%>
+    <%=f.file_field :logo%>
+
+    <% if @issue.logo.exists? %>
+      <%= link_to image_tag(@issue.logo.url(:thumb)),@issue.logo.url%>
+      <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
+    <% end %>
+  </div>
+
+  
 
 
   <%= f.submit "更新",:class => "btn btn-primary" %>

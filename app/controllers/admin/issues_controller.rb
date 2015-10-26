@@ -40,12 +40,19 @@ class Admin::IssuesController < ApplicationController
 
   def update
     Issue.find(params[:id]).update(issue_params)
-    vote_list = params[:issue][:vote_list]
-    vote_list.shift(1)
 
-    vote_list.each do|v|
-      vote_id = v.to_i
-      IssueVoteShip.create( :issue_id => params[:id], :vote_id => vote_id)
+    if params[:issue][:vote_list]
+      vote_list = params[:issue][:vote_list]
+      vote_list.shift(1)
+
+      vote_list.each do|v|
+        vote_id = v.to_i
+        IssueVoteShip.create( :issue_id => params[:id], :vote_id => vote_id)
+      end
+    end
+
+    if params[:destroy_logo] == "1"
+      @issue.logo = nil
     end
 
     flash[:notice] = "Update Success!"
@@ -62,7 +69,7 @@ class Admin::IssuesController < ApplicationController
   protected
 
   def issue_params
-    params.require(:issue).permit(:name, :category_id, :content, :vote_list)
+    params.require(:issue).permit(:name, :category_id, :content, :vote_list, :logo)
   end
 
 end
