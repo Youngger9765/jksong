@@ -8,6 +8,9 @@
 </head>
 <body>
 
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -34,16 +37,27 @@
           </div>
         <% end %>
 
-        
-        <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
-        <% if current_user %>
-          <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
-        <% end %>
-        <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
 
-        <% if current_user && current_user.admin? %>
-          <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
-        <% end %>
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
+          </li>
+          <li>
+            <% if current_user %>
+              <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
+            <% end %>
+           </li>
+          <li>
+            <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
+          </li>
+          <li>
+            <% if current_user && current_user.admin? %>
+              <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
+            <% end %>
+          </li> 
+        </ul>
+        
+     
     <%= yield %>
 
     </div>
