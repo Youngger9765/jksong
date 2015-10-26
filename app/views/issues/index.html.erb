@@ -1,22 +1,20 @@
-<h1>議題 Index</h1>
+<h1>熱門時事議題</h1>
 
 
 <br>
-<table class="table">
-  <tr>
-    <td>分類</td>
-    <td>議題名稱</td>
-    <td>議題內容</td>
-  </tr>
 
-  <% @issues.each do |i| %>
-    <tr>
-      <td><%= i.category.name%></td>
-      <td><%= link_to i.name, issue_path(i) %></td>
-      <td><%= i.content %></td>
-    </tr>
-  <% end %>
-
-</table>
+<div class="container">
+  <div class="row">
+    <% @issues.each do |i| %>
+      <div class="col-md-4" id="issue_board">
+          <ul>
+            <h1><%= link_to i.name, issue_path(i) %></h1>
+            <a href="<%= issue_path(i)%>"><img src="http://farm9.staticflickr.com/8448/7901449658_2bca50ca32.jpg" alt="" id="issues_photo" ></a>
+            
+          </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <%= paginate @issues %>
