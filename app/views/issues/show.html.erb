@@ -1,9 +1,6 @@
-<h1>Show</h1>
+<h1><%= @issue.name %></h1>
 
 <table class="table">
-  <tr>
-    <td>議題名稱： <%= @issue.name %></td>
-  </tr>
 
   <tr>
     <td>議題類型： <%= @issue.category.name %></td>
@@ -24,7 +21,7 @@
   </tr>
 
   <tr>
-    <td>你的表態：<%=  @profile_issue.try(:decision) %></td> 
+    <td>你的表態：<%=  personal_decision %></td> 
   </tr>
 
 </table>
