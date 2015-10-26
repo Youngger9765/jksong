@@ -32,6 +32,13 @@ Rails.application.routes.draw do
     resources :categories
   end  
 
+  scope :path => '/api/v1/', :defaults => { :format => :json }, :module => "api_v1", :as => 'v1' do
+
+    resources :issues # ApiV1::IssuesController
+
+  end
+
+
 
   root :to => "issues#index"
   # The priority is based upon order of creation: first created -> highest priority.
