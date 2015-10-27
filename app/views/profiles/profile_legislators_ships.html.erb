@@ -2,11 +2,10 @@
 
 
 
-  <% @related_legislators.each do |le|%>
+  <% @similar_legislators.each do |le|%>
     <li>
-    <%= le.name%>
-
-    <%= ((legislator_total_score(le.id).to_f)/(@profile.vote_number.to_f)*100).round(2)%>%
+      <%= le[:legislator].name %>
+      <%= le[:score] %>%
     </li>
   <% end %>
   

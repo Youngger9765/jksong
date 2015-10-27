@@ -28,34 +28,4 @@ class Issue < ActiveRecord::Base
     end
 
 
-    def legislator_category_score_subtraction(user_id,le,category_name)
-        
-        score = ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id)[category_name]
-        
-        score -= 1
-        ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id).update(category_name => score)
-        
-        total_score = ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id)[:total]
-        
-        total_score -= 1
-        ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id).update(:total => total_score)
-        
-    end
-
-
-    def legislator_category_score_plus(user_id,le,category_name)
-        score = ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id)[category_name]
-        
-        score += 1
-        ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id).update(category_name => score)
-        
-        total_score = ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id)[:total]
-        
-        total_score += 1
-        ProfileLegislatorShip.where(:profile_id => user_id).find_by_legislator_id(le.id).update(:total => total_score)
-
-    end
-
-
-
 end

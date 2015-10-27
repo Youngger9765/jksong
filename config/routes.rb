@@ -4,22 +4,19 @@ Rails.application.routes.draw do
 
   get "/about" => "votes#about"
 
-  
+  resources :legislators
 
   resources :profiles do
     member do
-      get :profile_issues_result
-      get :profile_legislators_ships
+      get :profile_issues_result # get :issues_result
+      get :profile_legislators_ships # get :similar_legislators
     end  
-    resources :legislators
-
   end  
 
   resources :issues do
     member do
-      get :user_votting
-      get :user_votting_destroy
-
+      post :vote
+      post :clear_all
     end
   end
 

@@ -1,3 +1,4 @@
+# TODO: remove
 class CategoriesController < ApplicationController
 
   def index

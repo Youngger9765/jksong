@@ -9,9 +9,9 @@
   <hr>
   法案：
   <% @issue.votes.each do |v| %>
-    <tr>
+    <tr id="issue_vote-<%=v.id%>">
       <td><%=v.uid %></td>
-      <td><%= link_to "刪除", admin_issue_path(@issue, :vote => v), :method => :delete, :class => "btn btn-primary" %></td>
+      <td><%= link_to "刪除", admin_issue_path(@issue, :vote => v), :remote => true, :method => :delete, :class => "btn btn-primary" %></td>
     </tr>
   <%end%>
 

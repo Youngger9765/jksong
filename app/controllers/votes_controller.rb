@@ -1,3 +1,4 @@
+# TODO: remove
 class VotesController < ApplicationController
 
 before_action :authenticate_user!

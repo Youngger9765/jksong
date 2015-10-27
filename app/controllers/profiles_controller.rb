@@ -18,18 +18,12 @@ class ProfilesController < ApplicationController
   end
 
   def profile_issues_result
-    @issues = @profile.votting_issues
-    @profile_issue_ships = ProfileIssueShip.where(:profile_id => @profile.id)
+    @issues = current_user.get_issues_report
   end
 
   def profile_legislators_ships
-    @legislator = Legislator.all
-    @issues = @profile.votting_issues
-    @related_legislators = Legislator.joins(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => current_user.profile.id}).order("total DESC")
-
+    @similar_legislators = current_user.get_similar_legislators
   end
-
-
 
   private
 
@@ -38,7 +32,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    @profile = Profile.find(params[:id])
+    @profile = current_user.profile
   end
 
 end

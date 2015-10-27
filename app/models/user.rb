@@ -12,6 +12,39 @@ class User < ActiveRecord::Base
   has_many :issues
   has_many :votes
 
+  def get_issue_decision(issue)
+    ship = ProfileIssueShip.where(:profile_id => self.profile.id, :issue_id => issue.id).first
+    ship.try(:decision)
+  end
+
+  def get_similar_legislators(n=20)
+     les = Legislator.includes(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => self.profile.id}).order("total DESC").limit(n)
+     my_votes_count = self.profile.vote_number
+     
+     les.map do |le|
+       { 
+         :legislator => le,
+         :score => ((le.profile_legislator_ships.first.total.to_f / my_votes_count)*100).round(2)
+       }
+     end
+  end
+
+  def get_issues_report
+    my_ships = self.profile.profile_issue_ships.includes(:issue => :category)
+    issues_ids = my_ships.map{ |s| s.issue_id }
+    all_ships = ProfileIssueShip.where( :issue_id => issues_ids )
+
+    my_ships.map do |s|
+      {
+        :issue => s.issue,
+        :category => s.issue.category.name,
+        :decision => s.decision,
+        :total_yes => all_ships.select{ |a| a.issue_id == s.issue_id && a.decision == "1" }.size,
+        :total_no => all_ships.select{ |a| a.issue_id == s.issue_id && a.decision == "-1" }.size,
+      }
+    end
+  end
+
   def username
     self.profile.username
   end

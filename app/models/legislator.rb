@@ -16,53 +16,18 @@ class Legislator < ActiveRecord::Base
       legislator_scores.to_a.sum(&category.to_sym)
     end
   end
-
-  def total_score_from(legislator_score_table)
-    ScoreService.total_score(legislator_score_table)
-  end
-
-  def total_score_from(legislator_score_table)
-    ScoreService.total_score(legislator_score_table)
-  end
   
+  def get_scores_by_categories
+    categories = Category.pluck(:english_name) << 'total'
+    results = Hash.new(0)
 
-  # def total_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:total)
-  # end 
+    self.profile_legislator_ships.each do |s|
+      categories.each do |c|
+        results[c] += s.public_send(c)
+      end
+    end    
 
-  # def law_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:law)
-  # end 
-
-  # def diplomacy_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:diplomacy)
-  # end 
-  
-  # def interior_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:interior)
-  # end 
-
-  # def finance_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:finance)
-  # end 
-
-  # def economy_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:economy)
-  # end 
-
-  # def traffic_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:traffic)
-  # end 
-
-  # def education_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:education)
-  # end 
-
-  # def social_score(legislator_scores)
-  #   legislator_scores.to_a.sum(&:social)
-  # end 
-
-
-  
+    results
+  end  
 
 end

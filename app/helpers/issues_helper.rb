@@ -1,15 +1,15 @@
 module IssuesHelper
 
-  def personal_decision
-    if !@profile_issue
+  def display_personal_decision(decision)
+    if decision.nil?
       "你還沒投票喔"
-    elsif @profile_issue.decision && @profile_issue.decision == "1"
+    elsif decision == "1"
       "贊成"
-    elsif @profile_issue.decision && @profile_issue.decision== "-1"
+    elsif decision == "-1"
       "反對"
-    elsif @profile_issue.decision && @profile_issue.decision == "0"
+    elsif decision == "0"
       "不表態"
-    end  
+    end
   end
 
 

@@ -5,7 +5,7 @@
   <% @legislators.each do |le| %>
     
     <tr>
-      <td><%= link_to le.name, profile_legislator_path(@profile, le)%></td>
+      <td><%= link_to le.name, legislator_path(le)%></td>
     </tr>
 
   <%end%>

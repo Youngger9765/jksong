@@ -9,17 +9,13 @@
   </tr> 
   <tr>
     <td>
-      <%= @legislator.total_score_from(@legislator_score_table) %>
+      <%= @scores["total"] %>
     </td>
     <td>
-      Law: <%= ScoreService.law_score(@legislator_score_table)%>
-      diplomacy: <%= ScoreService.diplomacy_score(@legislator_score_table)%>
-      interior: <%= ScoreService.interior_score(@legislator_score_table)%>
-      finance: <%= ScoreService.finance_score(@legislator_score_table)%>
-      economy: <%= ScoreService.economy_score(@legislator_score_table)%>
-      traffic: <%= ScoreService.traffic_score(@legislator_score_table)%>
-      education: <%= ScoreService.education_score(@legislator_score_table)%>
-      social: <%= ScoreService.social_score(@legislator_score_table)%>
+
+      <% @categories.each do |c| %>
+        <%= t(c, :scope => "category") %>: <%= @scores[c] %>
+      <% end %>
     </td>
 
 

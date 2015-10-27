@@ -14,12 +14,12 @@
 
   <% @issues.each do |i| %> 
   <tr>
-    <td><%= link_to i.name, issue_path(i) %></td>
-    <td><%= i.category.name%></td>
-    <td><%= @profile_issue_ships.find_by_issue_id(i.id).decision%></td>
+    <td><%= link_to i[:issue].name, issue_path(i[:issue]) %></td>
+    <td><%= i[:category] %></td>
+    <td><%= i[:decision] %></td>
     <td>
-    贊成：<%= @profile_issue_ships.where("issue_id = ? AND decision = ? ", i.id, 1 ).size%>
-    反對：<%= @profile_issue_ships.where("issue_id = ? AND decision = ? ", i.id, -1 ).size%>
+    贊成：<%= i[:total_yes] %>
+    反對：<%= i[:total_no] %>
     </td>
   </tr>
   <% end %>
