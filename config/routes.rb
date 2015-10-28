@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   scope :path => '/api/v1/', :defaults => { :format => :json }, :module => "api_v1", :as => 'v1' do
 
     resources :issues # ApiV1::IssuesController
+    resources :legislators
 
   end
 
