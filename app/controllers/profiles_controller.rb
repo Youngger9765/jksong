@@ -25,6 +25,10 @@ class ProfilesController < ApplicationController
     @similar_legislators = current_user.get_similar_legislators
   end
 
+  def registed_data
+    @profile = current_user.profile
+  end
+
   private
 
   def profile_params

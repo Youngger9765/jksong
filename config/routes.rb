@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :profiles do
     member do
+      get :registed_data
       get :profile_issues_result # get :issues_result
       get :profile_legislators_ships # get :similar_legislators
     end  

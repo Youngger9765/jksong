@@ -4,7 +4,11 @@ class IssuesController < ApplicationController
 
   def index
     @issues = Issue.all
-    @profile = current_user.profile
+    if current_user
+      @profile = current_user.profile
+    else
+      
+    end
   end
 
   def show

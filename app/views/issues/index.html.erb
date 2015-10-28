@@ -1,7 +1,7 @@
 <div class="container" id="issue-show">
   <div class="row">
     <% @issues.each do |i| %>
-      <% if !@profile.vote_issue?(i)%>
+      <% if current_user &&  !@profile.vote_issue?(i)%>
         <div class="col-md-3 not-voted" id="issue_board">
             <h3><%= link_to i.name, issue_path(i) %></h3>
             <div id="issue_photo">
@@ -11,14 +11,23 @@
             </div>
         </div>
       
-      <%else%>
+      <%elsif current_user && @profile.vote_issue?(i)%>
         <div class="col-md-3 voted" id="issue_board">
             <h3><%= link_to i.name, issue_path(i) %></h3>
             <div id="issue_photo">
-              <%= image_tag("taiwan-vote.gif")%>
+              <%= link_to image_tag("taiwan-vote.gif"),issue_path(i) %>
             </div>
         </div>
 
+      <%else%>
+        <div class="col-md-3 not-voted" id="issue_board">
+            <h3><%= link_to i.name, issue_path(i) %></h3>
+            <div id="issue_photo">
+              <% if i.logo.exists? %>
+                <%= link_to image_tag(i.logo.url(:original)),issue_path(i)%>
+              <%end%>
+            </div>
+        </div>
       <%end%>
 
       
