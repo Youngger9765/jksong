@@ -41,6 +41,24 @@ class IssuesController < ApplicationController
     end    
   end
 
+  def clear_vote
+    @issue = Issue.find(params[:id])
+    @profile = current_user.profile
+    
+    profile_issue = @profile.profile_issue_ships.find_by_issue_id(params[:id])
+    profile_issue.destroy
+    profile_issue.save!
+
+    @profile.update_votes_count!
+    @profile.rebuild_profile_legislator_ships!
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js 
+    end 
+
+  end
+
   def clear_all
     @issue = Issue.find(params[:id])
     @profile = current_user.profile

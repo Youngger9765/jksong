@@ -2,27 +2,15 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-      <h2>你的表態：<%=  personal_decision %> </h2>
-
+    <div class="col-md-6" id="vote_declare">
+        <%= render :partial => 'vote_button' %>
     </div>
     <div class="col-md-6">
-      <%= link_to "贊成", user_votting_issue_path(@issue, :votting => "yes", :category => @issue.category.english_name),:class => "btn btn-success btn-large"%>
-      <%= link_to "反對", user_votting_issue_path(@issue, :votting => "no", :category => @issue.category.english_name),:class => "btn btn-danger btn-large"%>
-      <%= link_to "不表態", user_votting_issue_path(@issue, :votting => "pass", :category => @issue.category.english_name),:class => "btn btn-default btn-large"%>
-
-      <%= link_to "clear", user_votting_destroy_issue_path(@issue, :votting => "destroy"),:class => "btn btn-default"%>  
-
-    </div>
+      <%= link_to "clear_all", clear_all_issue_path(@issue), :method => :post, :class => "btn btn-info btn-large"%>
+    </div>   
   </div>
 
 </div>
-
-
-
-
-
-
 
 <div class="container">
   <div class="row">
@@ -65,18 +53,16 @@
 
 
 
-
+<% if current_user %>
 
 <h1>num : <%= @profile.vote_number %> </h1>
 
-
 <h1>目前跟你最相像的立委：
   
-  <% @related_legislators.each do |le|%>
+  <% @similar_legislators.each do |le|%>
     <li>
-    <%= le.name%>
-
-    <%= ((legislator_total_score(le.id).to_f)/(@profile.vote_number.to_f)*100).round(2)%>%
+      <%= le[:legislator].name %>
+      <%= le[:score] %>%
     </li>
   <% end %>
   
@@ -84,7 +70,4 @@
 
 
 
-
-
-
-
+<% end %>

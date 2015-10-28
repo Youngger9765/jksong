@@ -60,10 +60,14 @@ class Admin::IssuesController < ApplicationController
   end
 
   def destroy
-    vote = IssueVoteShip.where(:issue_id => params[:id]).find_by_vote_id(params[:vote])
-    vote.destroy
-    vote.save
-    redirect_to admin_issue_path(params[:id])
+    issue_vote = IssueVoteShip.where(:issue_id => params[:id]).find_by_vote_id(params[:vote])
+    issue_vote.destroy
+    issue_vote.save
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js # destroy.js.erb
+    end
   end
 
   protected

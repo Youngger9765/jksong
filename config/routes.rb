@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :issues do
     member do
       post :vote
+      post :clear_vote
       post :clear_all
     end
   end

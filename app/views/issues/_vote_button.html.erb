@@ -1,0 +1,33 @@
+<% if current_user && !@profile.vote_issue?(@issue) %>
+
+  <div class="col-md-6" id="vote_button">
+    <div class="col-md-3">
+      <%= link_to "贊成", vote_issue_path(@issue, :votting => "yes", :category => @issue.category.english_name), :remote => true, :method => :post, :class => "btn btn-success btn-large"%>
+    </div>
+    
+    <div class="col-md-3">
+    <%= link_to "反對", vote_issue_path(@issue, :votting => "no", :category => @issue.category.english_name), :remote => true, :method => :post, :class => "btn btn-danger btn-large"%>
+    </div>
+
+    <div class="col-md-3">
+    <%= link_to "不表態", vote_issue_path(@issue, :votting => "pass", :category => @issue.category.english_name), :remote => true, :method => :post, :class => "btn btn-default btn-large"%>
+    </div>
+  </div>
+
+<% elsif current_user && @profile.vote_issue?(@issue)%>  
+  <div class="col-md-12" id="re_vote">
+    <h3> 
+      你的表態：<%=  display_personal_decision(@my_decision) %> 
+      <%= link_to "重新投票", clear_vote_issue_path(@issue, :votting => "re_vote"), :remote => true, :method => :post, :class => "btn btn-info btn-large"%>
+    </h3>
+  </div>
+
+<% else%> 
+    <h3>   
+      你還沒登入喔！
+      <%= link_to "登入投票", user_omniauth_authorize_path(:facebook),:class => "btn btn-primary" %>
+    </h3>
+
+<% end %>  
+
+
