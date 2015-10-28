@@ -1,0 +1,7 @@
+目前跟你最相像的立委:
+<% @similar_legislators.each do |le|%>
+  <li>
+    <%= le[:legislator].name %>
+    <%= le[:score] %>%
+  </li> 
+<% end %>

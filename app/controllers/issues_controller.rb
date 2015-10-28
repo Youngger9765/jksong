@@ -7,7 +7,7 @@ class IssuesController < ApplicationController
     if current_user
       @profile = current_user.profile
     else
-      
+
     end
   end
 
@@ -16,7 +16,7 @@ class IssuesController < ApplicationController
    
     if current_user      
       @my_decision = current_user.get_issue_decision(@issue)      
-      @similar_legislators = current_user.get_similar_legislators
+      @similar_legislators = current_user.get_similar_legislators(1)
       @profile = current_user.profile
     end
   end
@@ -39,6 +39,9 @@ class IssuesController < ApplicationController
 
     @profile.update_votes_count!
     @profile.rebuild_profile_legislator_ships!
+    
+    @similar_legislators = current_user.get_similar_legislators(1)
+    @my_decision = current_user.get_issue_decision(@issue) 
 
     respond_to do |format|
       format.html { redirect_to :back }
@@ -56,6 +59,9 @@ class IssuesController < ApplicationController
 
     @profile.update_votes_count!
     @profile.rebuild_profile_legislator_ships!
+
+    @similar_legislators = current_user.get_similar_legislators(1)
+    @my_decision = current_user.get_issue_decision(@issue) 
 
     respond_to do |format|
       format.html { redirect_to :back }

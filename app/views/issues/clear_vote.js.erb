@@ -1,4 +1,5 @@
+$("#similar-legislater").html('<%= j render :partial=>"similar" %>');
+$("#similar-legislater").css("display","none")
 $("#vote_button").remove();
 $("#re_vote").remove();
 $("#vote_declare").append('<%=j render :partial => 'vote_button'%>');
-

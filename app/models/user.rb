@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     ship.try(:decision)
   end
 
-  def get_similar_legislators(n=20)
+  def get_similar_legislators(n=10)
      les = Legislator.includes(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => self.profile.id}).order("total DESC").limit(n)
      my_votes_count = self.profile.vote_number
      
