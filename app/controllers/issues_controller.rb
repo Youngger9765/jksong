@@ -3,7 +3,8 @@ class IssuesController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
 
   def index
-      @issues = Issue.page(params[:page]).per(8)
+    @issues = Issue.all
+    @profile = current_user.profile
   end
 
   def show

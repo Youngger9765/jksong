@@ -8,7 +8,68 @@
 </head>
 <body>
 
-<div class="header">
+
+<div class="nav navbar-fixed-top navbar navbar-inverse">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+        <li class="active">
+          <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
+        </li>
+      </div>
+      
+      <div class="col-md-1">
+        <li>
+          <% if current_user %>
+            <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
+          <% end %>
+        </li>
+      </div>
+
+      <div class="col-md-1">
+        <li>
+          <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
+        </li>
+      </div>
+
+      <div class="col-md-1">
+        <li>
+          <% if current_user && current_user.admin? %>
+            <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
+          <% end %>
+        </li>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4" id="log_in_control_bar">
+            <div class="col-md-12">
+              <% if !current_user %>
+                <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook),:class => "btn btn-primary" %>
+              <%elsif%>
+              
+              <%end%>
+
+              <% if current_user %>
+                  <%= current_user.profile.username%>
+                  <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
+              <% else %>
+                  <%= link_to('登入', new_session_path(:user)) %>
+              <% end %>
+            </div>
+          </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="header ">
   <div class="container">
     <h1><%= link_to "政客爽", root_path %></h1>
 
@@ -21,76 +82,26 @@
     <div class="clearfix"></div>
 
 
-<div class="container">
-
-  <div class="row">
-    <div class="col-md-12">  
-
-  
-      <div class="row">
-        <div class="col-md-6">       
-          <ul class="nav nav-tabs">
-            <li>
-              
-            </li>
-            <li class="active">
-              <%= link_to "議題投票", issues_path,:class => "btn btn-default"%>
-            </li>
-            <li>
-              <% if current_user %>
-                <%= link_to "個人資料", profile_path(current_user) ,:class => "btn btn-default"%>
-              <% end %>
-             </li>
-            <li>
-              <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
-            </li>
-            <li>
-              <% if current_user && current_user.admin? %>
-                <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
-              <% end %>
-            </li> 
-          </ul>         
-        </div>
-        
-        <div class="col-md-6" id="log_in_control_bar">
-          <div class="col-md-12">
-            <% if !current_user %>
-              <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook),:class => "btn btn-primary" %>
-            <%elsif%>
-            
-            <%end%>
-
-            <% if current_user %>
-                <%= current_user.profile.username%>
-                <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
-            <% else %>
-                <%= link_to('登入', new_session_path(:user)) %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      
-        
 
 
-        
-        
-     <% if flash[:notice].present? %>
+    <% if flash[:notice].present? %>
           <div style = "color: green">
             <%= flash[:notice]%>
           </div>
-        <% end %>
+    <% end %>
 
-        <% if flash[:alert].present? %>
-          <div style = "color: red">
-            <%= flash[:alert]%>
-          </div>
-        <% end %>
-    <%= yield %>
+    <% if flash[:alert].present? %>
+      <div style = "color: red">
+        <%= flash[:alert]%>
+      </div>
+    <% end %>
 
-    </div>
-  </div>
+
+<div class="container  ">
+  <%= yield %>
 </div>
+
+
 
 </body>
 </html>

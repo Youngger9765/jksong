@@ -6,6 +6,25 @@ body{
   background: #F0F0F0;
 }
 
+.nav2{
+  background: black;
+}
+
+
+.bo{
+  position:relative;
+  top:300px;
+}
+
+#issue-show .voted{
+  background: gray;
+}
+
+#issue-show .not-voted{
+  background: black;
+}
+
+
 #issue_photo img{
   height:200px;
   width:200px; 
@@ -49,7 +68,7 @@ td{
 #log_in_control_bar div{
   font-size:200%;
   font-family: "標楷體","Times New Roman",Georgia,Serif;
-  color: black;
+  color: white;
 }
 
 
