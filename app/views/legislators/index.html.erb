@@ -1,13 +1,15 @@
 <h1>Legislator list</h1>
 
-<table class="table">
-  
-  <% @legislators.each do |le| %>
-    
-    <tr>
-      <td><%= link_to le.name, legislator_path(le)%></td>
-    </tr>
 
-  <%end%>
-
-</table>
+<div class="container" id="legislator_show">
+  <div class="row">
+    <% @legislators.each do |le| %>
+      <div class="col-md-3" id="legislator_board">
+        <h3><%= link_to le.name, legislator_path(le)%></h3>
+        <div id="legislator_photo"> 
+          <a href="#" ><img src="<%=le.image%>"> </a>
+        </div>  
+      </div>
+    <%end%>
+  </div>
+</div>

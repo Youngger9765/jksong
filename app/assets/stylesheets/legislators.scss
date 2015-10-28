@@ -1,3 +1,31 @@
 // Place all the styles related to the legislators controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#legislator_show{
+  background: black;
+
+}
+
+#legislator_photo img{
+  height:200px;
+  width:200px; 
+  border-radius: 500px;
+
+}
+
+#legislator_board{
+  font-family: "Microsoft JhengHei","Times New Roman",Georgia,Serif;
+  border-width:9px; 
+  border-style:outset;
+  border-radius: 300px;
+  text-align:center;
+  background: black;
+  margin:2%;
+}
+
+#legislator_board a{
+  color:white;
+  text-decoration: none;
+}

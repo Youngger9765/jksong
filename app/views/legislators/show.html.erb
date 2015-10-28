@@ -1,25 +1,22 @@
 <h1>Legislator Show</h1>
 <h3><%= @legislator.name%></h3>
 
+<div class="container">
+  <table class="table">
+    <tr>
+      <td>人氣指數</td>
+      <td>各領域吸票程度</td>
+    </tr> 
+    <tr>
+      <td>
+        <%= @scores["total"] %>
+      </td>
+      <td>
 
-<table class="table">
-  <tr>
-    <td>人氣指數</td>
-    <td>各領域吸票程度</td>
-  </tr> 
-  <tr>
-    <td>
-      <%= @scores["total"] %>
-    </td>
-    <td>
-
-      <% @categories.each do |c| %>
-        <%= t(c, :scope => "category") %>: <%= @scores[c] %>
-      <% end %>
-    </td>
-
-
-  </tr>
-  
-
-</table>
+        <% @categories.each do |c| %>
+          <%= t(c, :scope => "category") %>: <%= @scores[c] %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>
