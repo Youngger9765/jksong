@@ -2,15 +2,12 @@
   <div class="row">
     <% @issues.each do |i| %>
       <div class="col-md-3" id="issue_board">
-            <h1><%= link_to i.name, issue_path(i) %></h1>
+            <h3><%= link_to i.name, issue_path(i) %></h3>
             <a href="<%= issue_path(i)%>"><img src="http://farm9.staticflickr.com/8448/7901449658_2bca50ca32.jpg" alt="" id="issues_photo" ></a>
       </div>
     <% end %>
   </div>
 </div>
-
-
-
 
 
 <%= paginate @issues %>

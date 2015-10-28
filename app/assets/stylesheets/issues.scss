@@ -3,12 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body{
-  background: #ECF5FF;
+  background: #CAFFFF;
 }
 
 
 #issues_photo{
-  width:100%; 
+  width:70%; 
+  border-radius: 300px;
 
 }
 
@@ -16,11 +17,19 @@ body{
   font-family: "Microsoft JhengHei","Times New Roman",Georgia,Serif;
   border-width:9px; 
   border-style:outset;
+  border-radius: 300px;
   text-align:center;
-  background: pink;
+  background: black;
   margin:2%;
 
 }
+
+#issue_board a{
+  color:white;
+  text-decoration: none;
+}
+
+
 
 td{
   font-size:20px;
