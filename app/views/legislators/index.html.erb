@@ -7,7 +7,7 @@
       <div class="col-md-3" id="legislator_board">
         <h3><%= link_to le.name, legislator_path(le)%></h3>
         <div id="legislator_photo"> 
-          <a href="#" ><img src="<%=le.image%>"> </a>
+          <a href="<%=legislator_path(le)%>" ><img src="<%=le.image%>"> </a>
         </div>  
       </div>
     <%end%>
