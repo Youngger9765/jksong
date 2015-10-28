@@ -3,13 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body{
-  background: #CAFFFF;
+  background: #F0F0F0;
 }
 
-
-#issues_photo{
-  width:70%; 
-  border-radius: 300px;
+#issue_photo img{
+  height:200px;
+  width:200px; 
+  border-radius: 500px;
 
 }
 
@@ -21,15 +21,12 @@ body{
   text-align:center;
   background: black;
   margin:2%;
-
 }
 
 #issue_board a{
   color:white;
   text-decoration: none;
 }
-
-
 
 td{
   font-size:20px;

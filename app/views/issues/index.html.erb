@@ -3,7 +3,11 @@
     <% @issues.each do |i| %>
       <div class="col-md-3" id="issue_board">
             <h3><%= link_to i.name, issue_path(i) %></h3>
-            <a href="<%= issue_path(i)%>"><img src="http://farm9.staticflickr.com/8448/7901449658_2bca50ca32.jpg" alt="" id="issues_photo" ></a>
+            <div id="issue_photo">
+              <% if i.logo.exists? %>
+                <%= link_to image_tag(i.logo.url(:original)),i.logo.url%>
+              <%end%>
+            </div>
       </div>
     <% end %>
   </div>
