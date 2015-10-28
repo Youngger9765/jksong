@@ -9,8 +9,8 @@
       <td>分類</td> 
       <td>編輯人</td>
     </tr>
-  <% @issues.each do |i|%>  
-    <tr>
+  <% @issues.each do |i|%> 
+    <tr class ="unvote_color">
       <td><%= link_to i.name, admin_issue_path(i) %></td>
       <td><%= i.created_at %></td>
       <td><%= i.category.name%></td>
