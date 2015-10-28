@@ -20,4 +20,10 @@
 
 </table>
 
+<h2>建立新議題</h2>
 
+<%= form_for @issue, :url => admin_issues_path do |f| %>
+
+  <%= render :partial => 'form', :locals => { :f => f} %>
+
+<% end %>
