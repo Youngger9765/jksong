@@ -20,7 +20,4 @@ class ApiV1::IssuesController < ApiController
     end
   end
 
-
-
-
 end
