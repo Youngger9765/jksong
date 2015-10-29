@@ -3,34 +3,25 @@
     <% @issues.each do |i| %>
       <% if current_user &&  !@profile.vote_issue?(i)%>
         <div class="col-md-3 not-voted" id="issue_board">
-            <h3><%= link_to i.name, issue_path(i) %></h3>
-            <div id="issue_photo">
-              <% if i.logo.exists? %>
-                <%= link_to image_tag(i.logo.url(:original)),issue_path(i)%>
-              <%end%>
-            </div>
+            <h3>
+            <%= render :partial => 'category_icon', :locals => { :i => i} %>
+            <%= link_to i.name, issue_path(i) %>
+            </h3>
         </div>
-      
       <%elsif current_user && @profile.vote_issue?(i)%>
         <div class="col-md-3 voted" id="issue_board">
-            <h3><%= link_to i.name, issue_path(i) %></h3>
-            <div id="issue_photo">
-              <%= link_to image_tag("taiwan-vote.gif"),issue_path(i) %>
-            </div>
+          <h3>
+          <%= render :partial => 'category_icon', :locals => { :i => i} %>
+          <%= link_to i.name, issue_path(i) %></h3>
         </div>
-
       <%else%>
         <div class="col-md-3 not-voted" id="issue_board">
-            <h3><%= link_to i.name, issue_path(i) %></h3>
-            <div id="issue_photo">
-              <% if i.logo.exists? %>
-                <%= link_to image_tag(i.logo.url(:original)),issue_path(i)%>
-              <%end%>
-            </div>
+          <h3>
+          <%= render :partial => 'category_icon', :locals => { :i => i} %>
+          <%= link_to i.name, issue_path(i) %>
+          </h3>
         </div>
-      <%end%>
-
-      
+      <%end%>    
     <% end %>
   </div>
 </div>

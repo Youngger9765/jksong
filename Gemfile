@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "font-awesome-rails"
+
 gem "paperclip", "~> 4.3"
 
 gem 'capistrano-rails', :group => :development

@@ -36,29 +36,24 @@
 }
 
 #issue-show .voted{
-  background: gray;
+  background: white;
 }
 
 #issue-show .not-voted{
-  background: yellow;
+  background: white;
 }
 
-
-#issue_photo img{
-  height:200px;
-  width:200px; 
-  border-radius: 500px;
-
-}
 
 #issue_board{
   font-family: "Microsoft JhengHei","Times New Roman",Georgia,Serif;
-  border-width:9px; 
+  border-width:2px; 
   border-style:outset;
-  border-radius: 300px;
   text-align:center;
   background: black;
-  margin:2%;
+  margin-top:1%;
+  margin-bottom:1%;
+  margin-right:4%;
+  margin-left: 4%;
 }
 
 #issue_board a{
