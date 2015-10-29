@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :issues
   has_many :votes
 
+  serialize :fb_raw_data
+
   before_create :generate_authentication_token
 
   def self.get_fb_data(access_token)
