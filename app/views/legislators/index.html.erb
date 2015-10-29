@@ -1,15 +1,41 @@
-<h1>Legislator list</h1>
+<h1 class="text-center page_title">
+  第八屆立法委員
+</h1>
 
 
 <div class="container" id="legislator_show">
   <div class="row">
     <% @legislators.each do |le| %>
-      <div class="col-md-3" id="legislator_board">
-        <h3><%= link_to le.name, legislator_path(le)%></h3>
-        <div id="legislator_photo"> 
-          <a href="<%=legislator_path(le)%>" ><img src="<%=le.image%>"> </a>
-        </div>  
-      </div>
+      <%if le.party == "中國國民黨"%>
+        <div class="col-md-3 kmt" id="legislator_board" >
+          <%= render :partial => 'legislators', :locals => { :le => le}%>
+        </div> 
+      <%elsif le.party == "民主進步黨"%>
+        <div class="col-md-3 dpp" id="legislator_board" >
+          <%= render :partial => 'legislators', :locals => { :le => le}%>
+        </div> 
+
+      <%elsif le.party == "民國黨" %>
+        <div class="col-md-3 mkt" id="legislator_board" >
+          <%= render :partial => 'legislators', :locals => { :le => le}%>
+        </div> 
+
+      <%elsif le.party == "無黨團結聯盟" %>
+        <div class="col-md-3 npsu" id="legislator_board" >
+          <%= render :partial => 'legislators', :locals => { :le => le}%> 
+        </div> 
+
+      <%elsif le.party == "臺灣團結聯盟" %>
+        <div class="col-md-3 tsu" id="legislator_board" >
+          <%= render :partial => 'legislators', :locals => { :le => le}%>
+        </div> 
+
+      <%elsif le.party == "親民黨" %>
+        <div class="col-md-3 pfp" id="legislator_board" >
+          <%= render :partial => 'legislators', :locals => { :le => le}%>
+        </div> 
+
+      <%end%>
     <%end%>
   </div>
 </div>

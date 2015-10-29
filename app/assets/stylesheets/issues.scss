@@ -2,13 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#nav1{
+  height:30px;
+  margin:0;
+}
+
+#nav1 .col-md-1{
+  margin-top:15px;
+}
+
+#nav1 .col-md-1 a{
+  margin-top:10px;
+  color:black;
+  font-size:16px;
+}
 
 
 .nav2{
-  background: black;
+  background: #0ce8e2;
+  height:40px;
 }
 
-#jksong_logo img{
+#jksong_logo  img{
+  margin-top:-10px;
   height:40px;
 }
 
@@ -24,7 +40,7 @@
 }
 
 #issue-show .not-voted{
-  background: black;
+  background: yellow;
 }
 
 
@@ -46,7 +62,7 @@
 }
 
 #issue_board a{
-  color:white;
+  color:black;
   text-decoration: none;
 }
 
@@ -64,6 +80,7 @@ td{
 }
 
 #log_in_control_bar{
+  margin-top:5px;
   text-align:center; 
 
 }

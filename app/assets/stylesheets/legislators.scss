@@ -3,28 +3,63 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.page_title{
+  color:white;
+}
+
 #legislator_show{
 
 }
 
 #legislator_photo img{
-  height:200px;
-  width:200px; 
+  height:100px;
+  width:100px; 
   border-radius: 500px;
 
 }
 
 #legislator_board{
+  height:200px;
+  width:200px; 
   font-family: "Microsoft JhengHei","Times New Roman",Georgia,Serif;
   border-width:9px; 
   border-style:outset;
   border-radius: 300px;
   text-align:center;
   background: black;
-  margin:4%;
+  margin:7%;
 }
 
 #legislator_board a{
   color:white;
   text-decoration: none;
 }
+
+#legislator_show .kmt{
+  background: blue;
+}
+
+#legislator_show .dpp{
+  background: green;
+}
+
+
+#legislator_show .mkt{
+  background: #FFD306 ;
+}
+
+#legislator_show .npsu{
+  background: #BF0060 ;
+}
+
+
+#legislator_show .tsu{
+  background: #FF8000 ;
+}
+
+#legislator_show .pfp{
+  background: #F75000 ;
+}
+
+
+

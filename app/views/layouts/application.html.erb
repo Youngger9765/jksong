@@ -9,42 +9,48 @@
 <body>
 
 
-<div class="nav navbar-fixed-top navbar nav2">
+<div class="nav navbar-fixed-top navbar nav2" id="nav1">
   <div class="container">
     <div class="row">
       <div class="col-md-1" id="jksong_logo">
         <li>
-          <%= link_to image_tag("jksong_logo_2.png"), issues_path %>
+          <%= link_to image_tag("jksong_logo4.png"), issues_path %>
         </li>
       </div>
 
       <div class="col-md-1 col-md-offset-3">
         <li class="active">
-          <%= link_to "投票囉！", issues_path,:class => "btn btn-default"%>
+          <%= link_to "投票囉！", issues_path%>
         </li>
       </div>
       
       <div class="col-md-1">
         <li>
           <% if current_user %>
-            <%= link_to "開票囉！", profile_path(current_user) ,:class => "btn btn-default"%>
+            <%= link_to "開票囉！", profile_path(current_user) %>
           <% end %>
         </li>
       </div>
 
       <div class="col-md-1">
-        <li>
-          <%= link_to "關於我們", about_path ,:class => "btn btn-default"%>
+        <li>          
+          <%= link_to "個人專區", profile_path(current_user) %>
         </li>
       </div>
 
       <div class="col-md-1">
         <li>
-          <% if current_user && current_user.admin? %>
-            <%= link_to "管理者", admin_users_path ,:class => "btn btn-default"%>
-          <% end %>
+          <%= link_to "關於我們", about_path%>
         </li>
       </div>
+
+      <% if current_user && current_user.admin? %>
+        <div class="col-md-1">
+          <li>
+              <%= link_to "管理者", admin_users_path %>
+          </li>
+        </div>
+      <% end %>
 
       <div class="col-md-3 " id="log_in_control_bar">
             <div class="col-md-12">
