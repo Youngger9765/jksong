@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026134752) do
+ActiveRecord::Schema.define(version: 20151029134017) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20151026134752) do
   end
 
   create_table "issue_vote_ships", force: :cascade do |t|
-    t.integer  "issue_id",   limit: 4 # index
-    t.integer  "vote_id",    limit: 4 # index
+    t.integer  "issue_id",   limit: 4
+    t.integer  "vote_id",    limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -76,12 +76,12 @@ ActiveRecord::Schema.define(version: 20151026134752) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "profile_issue_ships", force: :cascade do |t| # rename to profile_issue_decisions
+  create_table "profile_issue_ships", force: :cascade do |t|
     t.integer  "profile_id", limit: 4
     t.integer  "issue_id",   limit: 4
     t.string   "decision",   limit: 255
-    t.string   "conflict",   limit: 255, default: "false" # removed
-    t.string   "like",       limit: 255, default: "false" # removed. it should be another table: profile_issue_likes
+    t.string   "conflict",   limit: 255, default: "false"
+    t.string   "like",       limit: 255, default: "false"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20151026134752) do
     t.datetime "updated_at",                          null: false
   end
 
-  create_table "profile_vote_ships", force: :cascade do |t| # drop table
+  create_table "profile_vote_ships", force: :cascade do |t|
     t.integer  "profile_id", limit: 4
     t.integer  "vote_id",    limit: 4
     t.string   "decision",   limit: 255
@@ -122,10 +122,10 @@ ActiveRecord::Schema.define(version: 20151026134752) do
     t.string   "username",     limit: 255
     t.integer  "user_id",      limit: 4
     t.integer  "location_id",  limit: 4,   default: 0
-    t.string   "status",       limit: 255, default: "未填寫" # remove default, just use placeholder
-    t.string   "role",         limit: 255, default: "normal" # remove default 
-    t.string   "bio",          limit: 255, default: "未填寫" # remove default
-    t.string   "occupation",   limit: 255, default: "未填寫" # remove default
+    t.string   "status",       limit: 255, default: "未填寫"
+    t.string   "role",         limit: 255, default: "normal"
+    t.string   "bio",          limit: 255, default: "未填寫"
+    t.string   "occupation",   limit: 255, default: "未填寫"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
     t.integer  "vote_number",  limit: 4,   default: 0
@@ -190,8 +190,10 @@ ActiveRecord::Schema.define(version: 20151026134752) do
     t.datetime "updated_at",                                      null: false
     t.string   "fb_uid",                 limit: 255
     t.string   "fb_token",               limit: 255
+    t.string   "authentication_token",   limit: 255
   end
 
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :issues
   has_many :votes
 
+  before_create :generate_authentication_token
+
   def get_issue_decision(issue)
     ship = ProfileIssueShip.where(:profile_id => self.profile.id, :issue_id => issue.id).first
     ship.try(:decision)
@@ -53,12 +55,16 @@ class User < ActiveRecord::Base
     self.profile.role == "admin"
   end
 
+  def generate_authentication_token
+    self.authentication_token = Devise.friendly_token
+  end
+
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid( auth.uid )
     if user
       user.fb_token = auth.credentials.token
-    #   user.fb_raw_data = auth
+      user.fb_raw_data = auth
       user.save!
       return user
     end
@@ -68,7 +74,7 @@ class User < ActiveRecord::Base
     if existing_user
       existing_user.fb_uid = auth.uid
       existing_user.fb_token = auth.credentials.token
-      #existing_user.fb_raw_data = auth
+      existing_user.fb_raw_data = auth
       existing_user.save!
       return existing_user
     end
@@ -79,7 +85,7 @@ class User < ActiveRecord::Base
     user.fb_token = auth.credentials.token
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
-    #user.fb_raw_data = auth
+    user.fb_raw_data = auth
     user.save!
     profile = user.create_profile
     profile.username = auth.info.name
