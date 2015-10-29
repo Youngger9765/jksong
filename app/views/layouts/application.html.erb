@@ -23,20 +23,22 @@
           <%= link_to "投票囉！", issues_path%>
         </li>
       </div>
-      
-      <div class="col-md-1">
-        <li>
-          <% if current_user %>
-            <%= link_to "開票囉！", legislators_path %>
-          <% end %>
-        </li>
-      </div>
-
-      <div class="col-md-1">
-        <li>          
-          <%= link_to "個人專區", profile_path(current_user) %>
-        </li>
-      </div>
+      <% if current_user %>
+        <div class="col-md-1">
+          <li>
+            <% if current_user %>
+              <%= link_to "開票囉！", legislators_path %>
+            <% end %>
+          </li>
+        </div>
+      <%end%>
+      <% if current_user %>
+        <div class="col-md-1">
+          <li>          
+            <%= link_to "個人專區", profile_path(current_user) %>
+          </li>
+        </div>
+      <%end%>
 
       <div class="col-md-1">
         <li>
@@ -54,12 +56,6 @@
 
       <div class="col-md-3 " id="log_in_control_bar">
             <div class="col-md-12">
-              <% if !current_user %>
-                <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook),:class => "btn btn-primary" %>
-              <%elsif%>
-              
-              <%end%>
-
               <% if current_user %>
                   <%= current_user.profile.username%>
                   <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
@@ -77,7 +73,14 @@
 <div class="header ">
   <div class="container">
     <p>三百年前，鄭克塽領導下，台灣政權投降滿清</p>
-    <p>三百年後，台灣在政客爽的領導下會有什麼後果呢？</p>    
+    <p>三百年後，台灣在政客爽的領導下會有什麼後果呢？</p>  
+    <div id="fB_login_button"> 
+      <% if !current_user %>
+        <%= link_to "Facebook 登入", user_omniauth_authorize_path(:facebook),:class => "btn btn-primary" %>
+      <%elsif%>
+      
+      <%end%>
+    </div>  
   </div>
   
 </div>
