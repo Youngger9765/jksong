@@ -92,6 +92,7 @@ class User < ActiveRecord::Base
       return existing_user
     end
 
+
     # Case 3: Create new password
     user = User.new
     user.fb_uid = auth.uid

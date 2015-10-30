@@ -4,6 +4,7 @@ class ApiV1::AuthController < ApiController
   before_action :authenticate_user!, :except => [:login]
 
   def login
+
     success = false
 
     if params[:email] && params[:password]
@@ -15,14 +16,16 @@ class ApiV1::AuthController < ApiController
         auth_hash = OmniAuth::AuthHash.new({
           uid: fb_data["id"],
           info: {
-            email: fb_data["email"]
+            email: params[:email]
           },
           credentials: {
             token: params[:access_token],
             expires_at: Time.now + 60.days
           }
         })
+
         user = User.from_omniauth(auth_hash)
+
       end
 
       success = fb_data && user.persisted?
@@ -33,7 +36,9 @@ class ApiV1::AuthController < ApiController
                         :auth_token => user.authentication_token,
                         :user_id => user.id}
     else
-      render :json => { :message => "Email or Password is wrong" }, :status => 401
+      render :json => { :message => "Email or Password is wrong",
+                        :fb_data => fb_data
+                        }, :status => 401
     end
   end
 
