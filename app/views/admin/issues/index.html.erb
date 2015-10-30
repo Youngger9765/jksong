@@ -8,6 +8,7 @@
       <td>建立時間</td>
       <td>分類</td> 
       <td>編輯人</td>
+      <td>控制</td>
     </tr>
   <% @issues.each do |i|%> 
     <tr class ="unvote_color">
@@ -15,6 +16,7 @@
       <td><%= i.created_at %></td>
       <td><%= i.category.name%></td>
       <td><%= i.user.try(:username) %> </td>
+      <td><%= link_to "Delete", admin_issue_path(i, :delete => "issue"), :method => :DELETE, :class => "btn btn-danger",:data => {:confirm => "你確定刪除 議題:#{i.name}"}%></td>
     </tr>
   <% end %>
 
