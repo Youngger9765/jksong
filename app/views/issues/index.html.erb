@@ -2,25 +2,32 @@
   <div class="row">
     <% @issues.each do |i| %>
       <% if current_user &&  !@profile.vote_issue?(i)%>
+      <%= link_to issue_path(i) do%>
         <div class="col-md-3 not-voted" id="issue_board">
             <h3>
-            <%= render :partial => 'category_icon', :locals => { :i => i} %>
-            <%= link_to i.name, issue_path(i) %>
+              <%= render :partial => 'category_icon', :locals => { :i => i} %>
+              <div>  <%=i.name%></div>
             </h3>
         </div>
+      <%end%> 
       <%elsif current_user && @profile.vote_issue?(i)%>
-        <div class="col-md-3 voted" id="issue_board">
-          <h3>
-          <%= render :partial => 'category_icon', :locals => { :i => i} %>
-          <%= link_to i.name, issue_path(i) %></h3>
-        </div>
+        <%= link_to issue_path(i) do%>
+          <div class="col-md-3 voted" id="issue_board">
+            <h3>
+              <%= render :partial => 'category_icon', :locals => { :i => i} %>
+              <div ><%=i.name%></div>
+            </h3>
+          </div>
+        <%end%>
       <%else%>
-        <div class="col-md-3 not-voted" id="issue_board">
-          <h3>
-          <%= render :partial => 'category_icon', :locals => { :i => i} %>
-          <%= link_to i.name, issue_path(i) %>
-          </h3>
-        </div>
+        <%= link_to issue_path(i) do%>
+          <div class="col-md-3 not-voted" id="issue_board">
+            <h3>
+              <%= render :partial => 'category_icon', :locals => { :i => i} %>
+              <div ><%=i.name%></div>
+            </h3>
+          </div>
+        <%end%>
       <%end%>    
     <% end %>
   </div>
