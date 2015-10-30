@@ -16,14 +16,15 @@ class ApiV1::AuthController < ApiController
         auth_hash = OmniAuth::AuthHash.new({
           uid: fb_data["id"],
           info: {
-            email: params[:email]
+            email: params[:email],
+            name: fb_data["name"]
           },
           credentials: {
             token: params[:access_token],
             expires_at: Time.now + 60.days
           }
         })
-
+        
         user = User.from_omniauth(auth_hash)
 
       end
