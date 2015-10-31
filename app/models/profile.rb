@@ -72,6 +72,7 @@ class Profile < ActiveRecord::Base
     def category_score_max(c)
       number = 0
       category_id = Category.where(:english_name => "#{c}").first.id
+      
       issues = self.votting_issues.where(:category => category_id)
       issues.each do |i|
         number += i.votes.size

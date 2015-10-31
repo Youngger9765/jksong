@@ -1,10 +1,28 @@
 <h1>你跟立委的相似度</h1>
 
 
+<table class="table">
+  <tr>
+    <td>立委</td>
+    <td>相似程度</td>
+    <td>類型細節： 立委相同意見 ｜ 我的投票數 </td>
+  </tr>
 
-  <% @similar_legislators.each do |le|%>
-    <li>
-      <%= le[:legislator].name %>
-      <%= le[:score] %>%
-    </li>
-  <% end %>
+    <% @similar_legislators.each do |le|%>
+      <tr>
+        <td><%= le[:legislator].name %> </td>
+        <td>  <%= le[:score] %>%</td>
+        <td>
+          <% @categories.each do |c| %>
+            <li><%= c.name %> ：<%= le[:legislator].profile_legislator_ships.first.get_score(c.english_name) %> | <%= @profile.category_score_max(c.english_name) %></li>
+          <%end%>
+        </td>
+      </tr>
+    <% end %>
+
+
+  
+
+
+</table>
+  

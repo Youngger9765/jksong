@@ -23,6 +23,7 @@ class ProfilesController < ApplicationController
 
   def profile_legislators_ships
     @similar_legislators = current_user.get_similar_legislators
+    @categories = Category.all
   end
 
   def registed_data
