@@ -45,12 +45,12 @@ namespace :dev do
         puts url
 
         data["results"].each do |r|
-
           RawLegislator.create( :url => r["url"],
                           :le_id => r["id"],
                           :legislator => r["legislator"],
                           :ad => r["ad"],
                           :name => r["name"],
+                          :county => r["county"],
                           :gender => r["gender"],
                           :party => r["party"],
                           :in_office => r["in_office"],
@@ -61,7 +61,7 @@ namespace :dev do
           url = data["next"]
           raw_content = RestClient.get(url)
           data = JSON.parse( raw_content )
-       end
+      end
 
   end
 
@@ -114,6 +114,7 @@ namespace :transfer do
                           :legislator => r[:legislator],
                           :ad => r[:ad],
                           :name => r[:name],
+                          :county => r[:county],
                           :gender => r[:gender],
                           :party => r[:party],
                           :in_office => r[:in_office],
