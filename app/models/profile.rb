@@ -69,8 +69,14 @@ class Profile < ActiveRecord::Base
       self.save!      
     end
 
-    def category_score_max(c = "total")
-      self.profile_legislator_ships.maximum("#{c}")
+    def category_score_max(c)
+      number = 0
+      category_id = Category.where(:english_name => "#{c}").first.id
+      issues = self.votting_issues.where(:category => category_id)
+      issues.each do |i|
+        number += i.votes.size
+      end
+      number  
     end
 
 
