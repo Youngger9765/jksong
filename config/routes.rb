@@ -39,6 +39,14 @@ Rails.application.routes.draw do
     post "/login" => "auth#login"
     post "/logout" => "auth#logout"
 
+    resources :profiles do
+      member do
+        get :registed_data
+        get :profile_issues_result # get :issues_result
+        get :profile_legislators_ships # get :similar_legislators
+      end  
+
+    end
   end
 
 

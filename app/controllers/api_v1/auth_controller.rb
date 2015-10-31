@@ -2,6 +2,7 @@ class ApiV1::AuthController < ApiController
 
     # required user login for logout action
   before_action :authenticate_user!, :except => [:login]
+  before_action :authenticate_user_from_token!, :except => [:login]
 
   def login
 
@@ -49,5 +50,9 @@ class ApiV1::AuthController < ApiController
 
     render :json => { :message => "Ok"}
   end
+
+
+
+
 
 end

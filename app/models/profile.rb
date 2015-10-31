@@ -69,4 +69,9 @@ class Profile < ActiveRecord::Base
       self.save!      
     end
 
+    def category_score_max(c = "total")
+      self.profile_legislator_ships.maximum("#{c}")
+    end
+
+
 end
