@@ -22,10 +22,20 @@ class ApiV1::ProfilesController < ApiController
       @similar_legislators = current_user.get_similar_legislators(legislator_number)
       @categories = Category.all
 
+
     else
       render :json => { :message => "auth_token fail",
                         }, :status => 401
     end
+  end
+
+  def registed_data
+    if authenticate_user_from_token!
+      @profile = current_user.profile
+    else
+      render :json => { :message => "auth_token fail",
+                        }, :status => 401
+    end 
   end
 
 
