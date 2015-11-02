@@ -1,6 +1,5 @@
 class ApiV1::ProfilesController < ApiController
 
-  before_action :authenticate_user!
   before_action :authenticate_user_from_token!
 
   def profile_issues_result
@@ -31,6 +30,7 @@ class ApiV1::ProfilesController < ApiController
 
   def registed_data
     if authenticate_user_from_token!
+
       @profile = current_user.profile
     else
       render :json => { :message => "auth_token fail",
