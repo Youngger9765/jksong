@@ -10,10 +10,11 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
+      raise
       flash[:notice] = "event was successfully updated"
       redirect_to profile_path(@profile)
     else
-      render "edit"
+      render :back
     end
   end
 

@@ -2,6 +2,23 @@ class ApiV1::ProfilesController < ApiController
 
   before_action :authenticate_user_from_token!
 
+  def update
+    @profile = current_user.profile
+    if authenticate_user_from_token!
+      if profile_params
+        @profile.update(profile_params)
+        render :json => { :message => "auth_token OK",
+                          :update => "update OK"}
+      else
+        render :json => { :message => "update fail"}
+      end
+    else                        
+      render :json => { :message => "auth_token fail"}
+    end
+
+  end
+
+
   def profile_issues_result
 
     if authenticate_user_from_token!
@@ -45,6 +62,13 @@ class ApiV1::ProfilesController < ApiController
       render :json => { :message => "auth_token fail",
                         }, :status => 401
     end 
+  end
+
+
+  private
+
+  def profile_params
+    params.require(:profile).permit(:location_id, :username, :bio, :occupation)
   end
 
 
