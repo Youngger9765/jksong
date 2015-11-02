@@ -30,7 +30,7 @@ class ApiV1::ProfilesController < ApiController
 
   def registed_data
     if authenticate_user_from_token!
-
+      @user = current_user
       @profile = current_user.profile
     else
       render :json => { :message => "auth_token fail",
