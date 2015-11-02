@@ -33,7 +33,15 @@ Rails.application.routes.draw do
 
   scope :path => '/api/v1/', :defaults => { :format => :json }, :module => "api_v1", :as => 'v1' do
 
-    resources :issues # ApiV1::IssuesController
+    resources :issues do# ApiV1::IssuesController
+      member do
+        post :vote
+      end  
+    end
+
+    post "issue_vote" => "issues#vote"
+    get "/issues/show" => "issues#show"
+
     resources :legislators
 
     post "/login" => "auth#login"
@@ -45,8 +53,9 @@ Rails.application.routes.draw do
         get :profile_issues_result # get :issues_result
         get :profile_legislators_ships # get :similar_legislators
       end  
-
     end
+
+
   end
 
 
