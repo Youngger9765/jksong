@@ -10,6 +10,8 @@ class LegislatorsController < ApplicationController
 
     @categories = Category.pluck(:english_name)
     @scores = @legislator.get_scores_by_categories
+
+    @total_people_votes = Profile.sum("vote_number")
   end
   
 
