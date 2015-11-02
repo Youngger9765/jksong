@@ -14,7 +14,10 @@
         <td>  <%= le[:score] %>%</td>
         <td>
           <% @categories.each do |c| %>
-            <li><%= c.name %> ：<%= le[:legislator].profile_legislator_ships.first.get_score(c.english_name) %> | <%= @profile.category_score_max(c.english_name) %></li>
+            <li>
+            <%= c.name %> ：
+            <%= le[:legislator].profile_legislator_ships.first.get_score(c.english_name) %> | 
+            <%= @profile.category_score_max(c.english_name) %></li>
           <%end%>
         </td>
       </tr>
