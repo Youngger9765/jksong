@@ -3,6 +3,7 @@ json.user_max_vote @user_max_vote_number
 json.legislator @similar_legislators do |le|
   json.id le[:legislator].id
   json.name le[:legislator].name
+  json.image_url le[:legislator].image
   json.total_score le[:score]
   json.party le[:legislator].party
   json.county le[:legislator].county
