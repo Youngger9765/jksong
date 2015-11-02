@@ -28,7 +28,6 @@ class ApiV1::AuthController < ApiController
         })
         
         user = User.from_omniauth(auth_hash)
-raise
       end
 
       success = fb_data && user.persisted?
