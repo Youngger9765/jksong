@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :issues # ApiV1::IssuesController
     resources :legislators
 
-    post "/login" => "auth#login"
+    get "/login" => "auth#login"
     post "/logout" => "auth#logout"
 
     resources :profiles do

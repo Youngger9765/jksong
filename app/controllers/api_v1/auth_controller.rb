@@ -13,11 +13,12 @@ class ApiV1::AuthController < ApiController
       success = user && user.valid_password?( params[:password] )
     elsif params[:access_token]
       fb_data = User.get_fb_data( params[:access_token] )
+      
       if fb_data
         auth_hash = OmniAuth::AuthHash.new({
           uid: fb_data["id"],
           info: {
-            email: params[:email],
+            email: fb_data["email"],
             name: fb_data["name"]
           },
           credentials: {
@@ -27,7 +28,7 @@ class ApiV1::AuthController < ApiController
         })
         
         user = User.from_omniauth(auth_hash)
-
+raise
       end
 
       success = fb_data && user.persisted?
