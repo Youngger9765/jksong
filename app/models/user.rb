@@ -33,8 +33,17 @@ class User < ActiveRecord::Base
     ship.try(:decision)
   end
 
-  def get_similar_legislators(n=10)
-     les = Legislator.includes(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => self.profile.id}).order("total DESC").limit(n)
+  def get_similar_legislators(n=10,county)
+    les = Legislator.includes(:profile_legislator_ships).where(:profile_legislator_ships => {:profile_id => self.profile.id})
+     
+    if county
+      les = les.where(:county => county).order("total DESC").limit(n)
+    else
+      les = les.order("total DESC").limit(n)
+    end
+
+     
+
      my_votes_count = self.profile.vote_number
      
      les.map do |le|

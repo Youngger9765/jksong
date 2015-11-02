@@ -15,10 +15,11 @@ class ApiV1::ProfilesController < ApiController
   end
 
   def profile_legislators_ships
+    county = params[:county]
     legislator_number = params[:total_number]
     if authenticate_user_from_token!
       @profile = User.find_by_authentication_token( params[:auth_token] ).profile
-      @similar_legislators = current_user.get_similar_legislators(legislator_number)
+      @similar_legislators = current_user.get_similar_legislators(legislator_number,county)
       @categories = Category.all
 
       @user_max_vote_number=0
@@ -29,8 +30,7 @@ class ApiV1::ProfilesController < ApiController
         end
         
       end
-      
-
+  
     else
       render :json => { :message => "auth_token fail",
                         }, :status => 401
