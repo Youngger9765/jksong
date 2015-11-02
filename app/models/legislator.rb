@@ -30,4 +30,9 @@ class Legislator < ActiveRecord::Base
     results
   end  
 
+  def get_higher_legislators_in_category(n=10, category)
+     
+
+  end
+
 end

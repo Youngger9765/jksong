@@ -1,7 +1,8 @@
 class LegislatorsController < ApplicationController
 
   def index
-    @legislators = Legislator.all  
+    @categories = Category.all
+    @legislators = Legislator.all
   end
 
   def show
