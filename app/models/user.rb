@@ -66,6 +66,7 @@ class User < ActiveRecord::Base
         :decision => s.decision,
         :total_yes => all_ships.select{ |a| a.issue_id == s.issue_id && a.decision == "1" }.size,
         :total_no => all_ships.select{ |a| a.issue_id == s.issue_id && a.decision == "-1" }.size,
+        :total_pass => all_ships.select{ |a| a.issue_id == s.issue_id && a.decision == "0" }.size,
       }
     end
   end

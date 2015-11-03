@@ -48,7 +48,8 @@ before_action :authenticate_user_from_token!, only:[:vote]
                         :issue_id => @issue.id,
                         :decision => @my_decision,
                         :total_yes => @total_votting[:total_yes],
-                        :total_no => @total_votting[:total_no]
+                        :total_no => @total_votting[:total_no],
+                        :total_pass => @total_votting[:total_pass]
                           }, :status => 200   
       else
       render :json => { :message => "auth_token fail",
