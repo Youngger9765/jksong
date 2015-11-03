@@ -62,12 +62,53 @@ before_action :authenticate_user_from_token!, only:[:vote]
                         :total_no => @total_votting[:total_no],
                         :total_pass => @total_votting[:total_pass]
                           }, :status => 200   
-      else
-      render :json => { :message => "auth_token fail",
-                        
-
-                          } 
+    else
+      render :json => { :message => "auth_token fail"} 
     end
+  end
+
+  def clear_vote
+    if authenticate_user_from_token!
+      @issue = Issue.find(params[:id])
+      @profile = current_user.profile
+      
+      profile_issue = @profile.profile_issue_ships.find_by_issue_id(params[:id])
+      if profile_issue
+        profile_issue.destroy
+        profile_issue.save!
+      end
+
+      @profile.update_votes_count!
+      @profile.rebuild_profile_legislator_ships!
+
+      @similar_legislators = current_user.get_similar_legislators(1)
+      @my_decision = current_user.get_issue_decision(@issue) 
+
+      render :json => { :message => "auth_token OK, delete vote decision OK",
+                        :profile_id => @profile.id,
+                        :issue_id => @issue.id,
+                        :decision => @my_decision
+                          }, :status => 200  
+    else
+      render :json => { :message => "clear_vote auth_token fail"} 
+    end
+
+
+
+  end
+
+  def clear_all
+    @issue = Issue.find(params[:id])
+    @profile = current_user.profile
+
+    ProfileLegislatorShip.delete_all
+    ProfileIssueShip.delete_all
+
+    @profile.vote_number = 0
+    @profile.issue_number = 0
+    @profile.save!
+
+    redirect_to issue_path(params[:id])
   end
 
 end

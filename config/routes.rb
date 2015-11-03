@@ -36,11 +36,14 @@ Rails.application.routes.draw do
     resources :issues do# ApiV1::IssuesController
       member do
         post :vote
+        post :clear_vote
+        post :clear_all
       end  
     end
 
-    post "issue_vote" => "issues#vote"
+    post "/issue_vote" => "issues#vote"
     get "/issues/show" => "issues#show"
+    post "/clear_vote" => "issues#clear_vote"
 
     resources :legislators
 
