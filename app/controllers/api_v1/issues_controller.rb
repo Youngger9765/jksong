@@ -44,6 +44,7 @@ before_action :authenticate_user_from_token!, only:[:vote]
       end
 
       render :json => { :message => "auth_token OK, update OK",
+                        :profile_id => @profile.id,
                         :issue_id => @issue.id,
                         :decision => @my_decision,
                         :total_yes => @total_votting[:total_yes],
