@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       end  
     end
 
+    patch "/profile_update" => "profile#update"
 
 
 
