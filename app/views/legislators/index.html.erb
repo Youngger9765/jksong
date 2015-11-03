@@ -24,30 +24,37 @@
       <%if le.party == "中國國民黨"%>
         <div class="col-md-3 kmt" id="legislator_board" >
           <%= render :partial => 'legislators', :locals => { :le => le}%>
+          <img src="<%=le.party_logo%>" class="party_logo">
         </div> 
+
       <%elsif le.party == "民主進步黨"%>
         <div class="col-md-3 dpp" id="legislator_board" >
           <%= render :partial => 'legislators', :locals => { :le => le}%>
+          <img src="<%=le.party_logo%>" class="party_logo">
         </div> 
 
       <%elsif le.party == "民國黨" %>
         <div class="col-md-3 mkt" id="legislator_board" >
           <%= render :partial => 'legislators', :locals => { :le => le}%>
+          <img src="<%=le.party_logo%>" class="party_logo">
         </div> 
 
       <%elsif le.party == "無黨團結聯盟" %>
         <div class="col-md-3 npsu" id="legislator_board" >
           <%= render :partial => 'legislators', :locals => { :le => le}%> 
+          <img src="<%=le.party_logo%>" class="party_logo">
         </div> 
 
       <%elsif le.party == "臺灣團結聯盟" %>
         <div class="col-md-3 tsu" id="legislator_board" >
           <%= render :partial => 'legislators', :locals => { :le => le}%>
+          <img src="<%=le.party_logo%>" class="party_logo">
         </div> 
 
       <%elsif le.party == "親民黨" %>
         <div class="col-md-3 pfp" id="legislator_board" >
           <%= render :partial => 'legislators', :locals => { :le => le}%>
+          <img src="<%=le.party_logo%>" class="party_logo">
         </div> 
 
       <%end%>
