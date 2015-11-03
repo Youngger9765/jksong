@@ -3,7 +3,18 @@ class ApiV1::IssuesController < ApiController
 before_action :authenticate_user_from_token!, only:[:vote]
 
   def index
-    @issues = Issue.all
+    if authenticate_user_from_token!
+      @profile = current_user.profile
+      
+      @issues = Issue.all
+      issue_ids = Issue.includes(:profile_issue_ships).where(:profile_issue_ships => {:profile_id => @profile.id}).pluck(:id)     
+      @issues = @issues.select{ |x| !issue_ids.include?(x.id) }
+
+    else 
+      @issues = Issue.all
+    end
+      
+
   end
 
   def show
