@@ -12,6 +12,10 @@ class Admin::UsersController < ApplicationController
     @profiles = Profile.all
   end
 
+  def show
+    @profile = Profile.find(params[:id])
+  end
+
   def edit
     @profile = User.profile.find(params[:id])
   end
