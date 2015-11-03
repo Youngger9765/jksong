@@ -36,9 +36,18 @@ before_action :authenticate_user_from_token!, only:[:vote]
       @similar_legislators = current_user.get_similar_legislators(1)
       @my_decision = current_user.get_issue_decision(@issue) 
 
+      @issues = current_user.get_issues_report
+      @issues.each do |i|
+        if i[:issue].id.to_s ==params[:id]
+          @total_votting = i
+        end
+      end
+
       render :json => { :message => "auth_token OK, update OK",
                         :issue_id => @issue.id,
-                        :decision => @my_decision
+                        :decision => @my_decision,
+                        :total_yes => @total_votting[:total_yes],
+                        :total_no => @total_votting[:total_no]
                           }, :status => 200   
       else
       render :json => { :message => "auth_token fail",
