@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     post "/issue_vote" => "issues#vote"
     get "/issues/show" => "issues#show"
     post "/clear_vote" => "issues#clear_vote"
+    post "/clear_all" => "issues#clear_all"
 
     resources :legislators
 

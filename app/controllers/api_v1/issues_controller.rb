@@ -98,17 +98,23 @@ before_action :authenticate_user_from_token!, only:[:vote]
   end
 
   def clear_all
-    @issue = Issue.find(params[:id])
-    @profile = current_user.profile
+    if authenticate_user_from_token!
+      @profile = current_user.profile
 
-    ProfileLegislatorShip.delete_all
-    ProfileIssueShip.delete_all
+      ProfileLegislatorShip.delete_all
+      ProfileIssueShip.delete_all
 
-    @profile.vote_number = 0
-    @profile.issue_number = 0
-    @profile.save!
+      @profile.vote_number = 0
+      @profile.issue_number = 0
+      @profile.save!
+      render :json => { :message => "auth_token OK, delete ALL vote decision!",
+                        :profile_id => @profile.id,
+                        :profile_vote_number => @profile.vote_number,
+                          }, :status => 200 
+    else
+      render :json => { :message => "clear_all auth_token fail"} 
+    end
 
-    redirect_to issue_path(params[:id])
   end
 
 end
