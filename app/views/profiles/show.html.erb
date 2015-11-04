@@ -1,7 +1,9 @@
-<h1><%= link_to "我的註冊資料", registed_data_profile_path(@profile) %></h1>
 
-<h1><%= link_to "我的投票結果", profile_issues_result_profile_path(@profile) %></h1>
+.
+<h1><%= link_to "我的註冊資料", registed_data_profile_path(@profile) ,:class => "btn btn-primary"%></h1>
+
+<h1><%= link_to "我的投票結果", profile_issues_result_profile_path(@profile), :class => "btn btn-success" %></h1>
  
-<h1><%= link_to "立委相似度",profile_legislators_ships_profile_path(@profile) %></h1>
+<h1><%= link_to "立委相似度",profile_legislators_ships_profile_path(@profile),:class => "btn btn-danger"  %></h1>
 
 <%= link_to "想審更多法案嗎？", issues_path, :class => "btn btn-default"%>
