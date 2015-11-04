@@ -5,7 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+categories = Category.create([{ name: '司法/法制', english_name: 'law'}, 
+                              { name: '外交/國防', english_name: 'diplomacy' }, 
+                              { name: '內政', english_name: 'interior' }, 
+                              { name: '財政', english_name: 'finance' }, 
+                              { name: '經濟', english_name: 'economy' }, 
+                              { name: '交通', english_name: 'traffic' },
+                              { name: '教育/文化', english_name: 'education' }, 
+                              { name: '社福/衛環', english_name: 'social' }])
 
 location = Location.create([{ name: "基隆市"},{ name: "臺北市"},
                             { name: "新北市"},{ name: "桃園市"},
