@@ -15,23 +15,22 @@ namespace :dev do
     raw_content = RestClient.get(url)
     data = JSON.parse( raw_content )
 
-      while data["next"] != nil
-         data["results"].each do |r|
+    while data["next"] != nil
+       data["results"].each do |r|
 
-          RawVote.create( :url => r["url"],
-                          :uid => r["uid"],
-                          :sitting_id => r["sitting_id"],
-                          :vote_seq => r["vote_seq"],
-                          :content => r["content"],
-                          :conflict => r["conflict"],
-                          :results => r["results"],
-                          :result => r["result"])
-        end
-          url = data["next"]
-          raw_content = RestClient.get(url)
-          data = JSON.parse( raw_content )
-       end
-
+        RawVote.create( :url => r["url"],
+                        :uid => r["uid"],
+                        :sitting_id => r["sitting_id"],
+                        :vote_seq => r["vote_seq"],
+                        :content => r["content"],
+                        :conflict => r["conflict"],
+                        :results => r["results"],
+                        :result => r["result"])
+      end
+        url = data["next"]
+        raw_content = RestClient.get(url)
+        data = JSON.parse( raw_content )
+    end
   end
 
   task :fetch_raw_legislator => :environment do
@@ -41,28 +40,27 @@ namespace :dev do
     raw_content = RestClient.get(url)
     data = JSON.parse( raw_content )
 
-      while data["next"] != nil 
-        puts url
+    while data["next"] != nil 
+      puts url
 
-        data["results"].each do |r|
-          RawLegislator.create( :url => r["url"],
-                          :le_id => r["id"],
-                          :legislator => r["legislator"],
-                          :ad => r["ad"],
-                          :name => r["name"],
-                          :county => r["county"],
-                          :gender => r["gender"],
-                          :party => r["party"],
-                          :in_office => r["in_office"],
-                          :education => r["education"],
-                          :experience => r["experience"],
-                          :image => r["image"])  
-        end
-          url = data["next"]
-          raw_content = RestClient.get(url)
-          data = JSON.parse( raw_content )
+      data["results"].each do |r|
+        RawLegislator.create( :url => r["url"],
+                        :le_id => r["id"],
+                        :legislator => r["legislator"],
+                        :ad => r["ad"],
+                        :name => r["name"],
+                        :county => r["county"],
+                        :gender => r["gender"],
+                        :party => r["party"],
+                        :in_office => r["in_office"],
+                        :education => r["education"],
+                        :experience => r["experience"],
+                        :image => r["image"])  
       end
-
+        url = data["next"]
+        raw_content = RestClient.get(url)
+        data = JSON.parse( raw_content )
+    end
   end
 
   task :fetch_raw_legislators_votes => :environment do
@@ -86,12 +84,9 @@ namespace :dev do
 
       url = data["next"]
       raw_content = RestClient.get(url)
-      data = JSON.parse( raw_content )
-     
+      data = JSON.parse( raw_content )   
     end
-
   end
-
 end
 
 namespace :transfer do
@@ -139,16 +134,10 @@ namespace :transfer do
         LegislatorVoteShip.create(  :legislator_id => legislator_id,
                                     :vote_id => vote_id,
                                     :decision => r[:decision],
-                                    :conflict => r[:conflict])
-
-        
+                                    :conflict => r[:conflict])  
       end
     end
   end  
-
-
-
-
 end
 
 
