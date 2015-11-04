@@ -1,7 +1,33 @@
-<hr>
+<h1> profile_issues_result </h1>
+<h2>
+Profile ID:<%=@profile.id%>
+</h2>
+<h2>
+Username:<%= @profile.username%>
+</h2>
+<h2>已經投過的議題：<%= @profile.issue_number%></h2>
+<h2>相關法案數：<%= @profile.vote_number%></h2>
 
-<%=@profile.username%>
+<table class="table">
+  <tr>
+    <td>議題名稱</td>
+    <td>議題分類</td> 
+    <td>個人投票</td>
+    <td>所有投票結果</td>
 
-<%=@profile.profile_issue_ships.find_by_issue_id(2).decision%>
+  </tr>
 
-<hr>
+  <% @issues.each do |i| %> 
+  <tr>
+    <td><%= link_to i[:issue].name, issue_path(i[:issue]) %></td>
+    <td><%= i[:category] %></td>
+    <td><%= i[:decision] %></td>
+    <td>
+    贊成：<%= i[:total_yes] %>
+    反對：<%= i[:total_no] %>
+    </td>
+  </tr>
+  <% end %>
+
+
+</table>

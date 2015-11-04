@@ -14,6 +14,8 @@ class Admin::UsersController < ApplicationController
 
   def show
     @profile = Profile.find(params[:id])
+    @issues =  @profile.user.get_issues_report
+    
   end
 
   def edit
