@@ -33,9 +33,9 @@ class Legislator < ActiveRecord::Base
     @legislators = Legislator.all
     
     get_score=0
-    first_score=0
-    second_score=0
-    third_score=0
+    first_score=-1
+    second_score=-1
+    third_score=-1
 
     first = nil
     second = nil
