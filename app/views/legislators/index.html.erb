@@ -3,61 +3,25 @@
 </h1>
 
 <table class="table">
-  <% @categories.each do |c|%>
+  <tr>
+    <td>領域</td>
+    <td>1st(票數)</td>
+    <td>2nd(票數)</td>
+    <td>3rd(票數)</td>
+  </tr>
+
+  <% @categories_all.each do |c|%>
     <tr>
       <td> <%=c.name%></td>
+      <td>
+        <%= render :partial => 'legislators', :locals => { :le => Legislator.get_higher_legislators_in_category(c.english_name)[0]}%>   
+      </td>
+      <td>
+         <%= render :partial => 'legislators', :locals => { :le => Legislator.get_higher_legislators_in_category(c.english_name)[1]}%>
+      </td>
+      <td>
+        <%= render :partial => 'legislators', :locals => { :le => Legislator.get_higher_legislators_in_category(c.english_name)[2]}%>
+      </td>
     </tr>
   <%end%>
 </table>
-
-
-
-
-
-
-
-
-
-<div class="container" id="legislator_show">
-  <div class="row">
-    <% @legislators.each do |le| %>
-      <%if le.party == "中國國民黨"%>
-        <div class="col-md-3 kmt" id="legislator_board" >
-          <%= render :partial => 'legislators', :locals => { :le => le}%>
-          <img src="<%=le.party_logo%>" class="party_logo">
-        </div> 
-
-      <%elsif le.party == "民主進步黨"%>
-        <div class="col-md-3 dpp" id="legislator_board" >
-          <%= render :partial => 'legislators', :locals => { :le => le}%>
-          <img src="<%=le.party_logo%>" class="party_logo">
-        </div> 
-
-      <%elsif le.party == "民國黨" %>
-        <div class="col-md-3 mkt" id="legislator_board" >
-          <%= render :partial => 'legislators', :locals => { :le => le}%>
-          <img src="<%=le.party_logo%>" class="party_logo">
-        </div> 
-
-      <%elsif le.party == "無黨團結聯盟" %>
-        <div class="col-md-3 npsu" id="legislator_board" >
-          <%= render :partial => 'legislators', :locals => { :le => le}%> 
-          <img src="<%=le.party_logo%>" class="party_logo">
-        </div> 
-
-      <%elsif le.party == "臺灣團結聯盟" %>
-        <div class="col-md-3 tsu" id="legislator_board" >
-          <%= render :partial => 'legislators', :locals => { :le => le}%>
-          <img src="<%=le.party_logo%>" class="party_logo">
-        </div> 
-
-      <%elsif le.party == "親民黨" %>
-        <div class="col-md-3 pfp" id="legislator_board" >
-          <%= render :partial => 'legislators', :locals => { :le => le}%>
-          <img src="<%=le.party_logo%>" class="party_logo">
-        </div> 
-
-      <%end%>
-    <%end%>
-  </div>
-</div>

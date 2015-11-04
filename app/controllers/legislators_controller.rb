@@ -1,8 +1,10 @@
 class LegislatorsController < ApplicationController
 
   def index
-    @categories = Category.all
+    @categories_all = Category.all
     @legislators = Legislator.all
+    @categories = Category.pluck(:english_name)
+    
   end
 
   def show

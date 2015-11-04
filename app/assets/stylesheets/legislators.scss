@@ -7,19 +7,25 @@
   color:white;
 }
 
-.party_logo{
-  height:100px;
-  width:100px; 
+#legislator_photo{
+  position: relative;
 }
 
-#legislator_show{
 
+#legislator_photo .party_logo{
+  position: absolute;
+  top:70px;
+  left:80px;
+  height:50px;
+  width:50px; 
+  border-radius: 30px;
 }
+
 
 #legislator_photo img{
   height:100px;
   width:100px; 
-  border-radius: 500px;
+  border-radius: 1px;
 
 }
 
