@@ -26,8 +26,7 @@ class ApiV1::ProfilesController < ApiController
       @issues = current_user.get_issues_report
     
     else
-      render :json => { :message => "auth_token fail",
-                        }, :status => 401
+      render :json => { :message => "auth_token fail"}
     end
   end
 
@@ -49,8 +48,7 @@ class ApiV1::ProfilesController < ApiController
       end
   
     else
-      render :json => { :message => "auth_token fail",
-                        }, :status => 401
+      render :json => { :message => "auth_token fail"}
     end
   end
 
@@ -59,8 +57,7 @@ class ApiV1::ProfilesController < ApiController
       @user = current_user
       @profile = current_user.profile
     else
-      render :json => { :message => "auth_token fail",
-                        }, :status => 401
+      render :json => { :message => "auth_token fail"}
     end 
   end
 
