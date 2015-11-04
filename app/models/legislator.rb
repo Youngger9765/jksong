@@ -26,32 +26,40 @@ class Legislator < ActiveRecord::Base
         results[c] += s.public_send(c)
       end
     end    
-
     results
   end  
 
   def self.get_higher_legislators_in_category(category)
     @legislators = Legislator.all
+    
     get_score=0
     first_score=0
     second_score=0
     third_score=0
 
+    first = nil
+    second = nil
+    third = nil
+
     @legislators.each do |le|
       get_score = le.get_scores_by_categories[category]
+      puts get_score
       if get_score > first_score
-        @first = le
+        first = le
         first_score = get_score
       elsif get_score > second_score
-        @second = le
+        second = le
         second_score = get_score
       elsif get_score > third_score
-        @third = le
+        third = le
         third_score = get_score
       end  
     end
-    @legislators_list = [@first,@second,@third]
-    
+    puts 'checkeeee'
+    puts [first,second,third]
+
+    @legislators_list = [first,second,third]
+
   end
 
 end
