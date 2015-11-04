@@ -4,6 +4,7 @@ json.legislator @similar_legislators do |le|
   json.id le[:legislator].id
   json.name le[:legislator].name
   json.image_url le[:legislator].image
+  json.party_url le[:legislator].party_logo
   json.total_score le[:score]
   json.party le[:legislator].party
   json.county le[:legislator].county
