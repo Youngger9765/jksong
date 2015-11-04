@@ -24,10 +24,20 @@
  */
 
 
+.navbar-default .navbar-nav > li > a {
+    color: black;
+    background-color: darkturquoise;
 
+}
+
+li:hover {
+    background-color: #fff;
+}
 
 body{
   background: white;
+  min-height: 2000px;
+  padding-top: 70px;
 }
 
 .header{
