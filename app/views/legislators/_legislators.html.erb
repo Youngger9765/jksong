@@ -1,4 +1,5 @@
 <h3><%= link_to le.name, legislator_path(le)%></h3>
 <div id="legislator_photo" > 
   <a href="<%=legislator_path(le)%>" ><img src="<%=le.image%>"> </a>
+  <img src="<%=le.party_logo%>" class="party_logo">
 </div> 

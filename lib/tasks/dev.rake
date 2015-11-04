@@ -101,21 +101,34 @@ namespace :transfer do
     end
   end  
 
+  task :transfer_legislator_8_party => :environment do
+    RawLegislator.where(:ad => 8).each do |r|
+      if Legislator.find_by_name(r[:name])
+        le = Legislator.find_by_name(r[:name])
+        le.party = r[:party]
+        le.save!
+        puts Legislator.find_by_name(r[:name]).try(:party)
+      end
+    end
+  end
+
+
   task :transfer_legislator_8 => :environment do
     RawLegislator.where(:ad => 8).each do |r|
 
-      Legislator.create(  :url => r[:url],
-                          :le_id => r[:le_id],
-                          :legislator => r[:legislator],
-                          :ad => r[:ad],
-                          :name => r[:name],
-                          :county => r[:county],
-                          :gender => r[:gender],
-                          :party => r[:party],
-                          :in_office => r[:in_office],
-                          :education => r[:education],
-                          :experience => r[:experience],
-                          :image => r[:image])
+        Legislator.create(  :url => r[:url],
+                            :le_id => r[:le_id],
+                            :legislator => r[:legislator],
+                            :ad => r[:ad],
+                            :name => r[:name],
+                            :county => r[:county],
+                            :gender => r[:gender],
+                            :party => r[:party],
+                            :in_office => r[:in_office],
+                            :education => r[:education],
+                            :experience => r[:experience],
+                            :image => r[:image])
+
     end
   end  
 
@@ -140,4 +153,41 @@ namespace :transfer do
   end  
 end
 
+namespace :refresh do
+  task :legislator_party_logo => :environment do
+    Legislator.all.each do |le|
+      le.party_logo = nil
+      le.save!
+    end
+
+  end
+end
+
+
+namespace :update do
+  task :legislator_party_logo => :environment do
+    puts "updating"
+    Legislator.all.each do |le|
+      if le.party =="中國國民黨"
+        le.party_logo = "http://attach.kmt.org.tw/200910/20091015163058.jpg"
+        le.save!
+      elsif le.party == "民主進步黨"
+        le.party_logo = "https://upload.wikimedia.org/wikipedia/zh/thumb/c/c1/Emblem_of_Democratic_Progressive_Party_(new).svg/1024px-Emblem_of_Democratic_Progressive_Party_(new).svg.png"
+        le.save!
+      elsif le.party == "民國黨"
+        le.party_logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flag_of_Minkuotang.svg/125px-Flag_of_Minkuotang.svg.png"
+        le.save!
+      elsif le.party == "無黨團結聯盟"
+        le.party_logo = "https://upload.wikimedia.org/wikipedia/zh/thumb/a/ac/Flag_of_NPSU.svg/125px-Flag_of_NPSU.svg.png"
+        le.save!
+      elsif le.party == "臺灣團結聯盟"
+        le.party_logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/TUS.png/125px-TUS.png"
+        le.save!
+      elsif le.party == "親民黨"
+        le.party_logo = "https://upload.wikimedia.org/wikipedia/zh/thumb/6/66/Flag_of_People_First_Party.svg/125px-Flag_of_People_First_Party.svg.png"
+        le.save!
+      end
+    end
+  end
+end
 
