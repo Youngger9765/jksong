@@ -10,4 +10,5 @@ json.data  @issues  do |i|
   json.issue_decision i[:decision]
   json.issue_total_yes i[:total_yes]
   json.issue_total_no i[:total_no]
+  json.issue_total_pass i[:total_pass]
 end
