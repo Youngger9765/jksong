@@ -2,6 +2,10 @@
 
 
 <h3>User Data</h3>
+
+   
+
+
 <table class="table">
     <tr>
       <td>姓名</td>
@@ -21,6 +25,11 @@
             <%=p.submit "Update", :class => "btn btn-primary"%>
           </div>
         <%end%>
+      </td>
+      <td>
+        <div class="col-md-6">
+          <%= link_to "clear_my_all_vote", issues_clear_all_path, :method => :post, :class => "btn btn-info btn-large"%>
+        </div>
       </td>
     </tr>
   <% end %>

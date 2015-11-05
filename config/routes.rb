@@ -18,9 +18,10 @@ Rails.application.routes.draw do
     member do
       post :vote
       post :clear_vote
-      post :clear_all
     end
   end
+
+  post "issues/clear_all" => "issues#clear_all"
 
   resources :votes
 

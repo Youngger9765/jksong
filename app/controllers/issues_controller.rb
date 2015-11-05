@@ -71,17 +71,16 @@ class IssuesController < ApplicationController
   end
 
   def clear_all
-    @issue = Issue.find(params[:id])
     @profile = current_user.profile
 
-    ProfileLegislatorShip.delete_all
-    ProfileIssueShip.delete_all
+    current_user.profile.profile_legislator_ships.delete_all
+    current_user.profile.profile_issue_ships.delete_all
 
     @profile.vote_number = 0
     @profile.issue_number = 0
     @profile.save!
 
-    redirect_to issue_path(params[:id])
+    redirect_to :back
   end
 
 
