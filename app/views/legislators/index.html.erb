@@ -2,52 +2,55 @@
   第八屆立法委員
 </h1>
 
-<table class="table" >
+<div class="col-md-2"></div>
 
-  <tr>
-    <td id="category_area">
-      <div class="btn btn-primary btn-lg">
-        分類領域
-      </div>
-    </td>
-    <td class="raking">
-      <%= image_tag("1st.png")%>
-    </td>
-    <td class="raking">
-      <%= image_tag("2nd.png")%>
-    </td>
-    <td class="raking">
-      <%= image_tag("3rd.png")%>
-    </td>
-  </tr>
+<div class="col-md-8 ">
+  <table class="table" >
 
-  <tr>
-    <td id="total_raking">
-      <div >
-        <%=link_to "總票數",legislators_path,:class =>"btn btn-danger btn-lg"%>
-      </div>
-    </td>
-  </tr> 
-
-  <% @higher_legislators_by_categories.each do |c, lhl|%>
     <tr>
-      <td class="le-cate">
-        <%= render :partial => 'category_icon', :locals => { :c => c} %>
-        <div>
-        <%=link_to c.name,legislators_path,:class =>"btn btn-info btn-lg"%>
+      <td id="category_area">
+        <div class="btn btn-primary btn-lg">
+          分類領域
         </div>
       </td>
-      <td>
-        <%= render :partial => 'legislators', :locals => { :le => lhl[0]}%>   
+      <td class="raking">
+        <%= image_tag("1st.png")%>
       </td>
-      <td>
-         <%= render :partial => 'legislators', :locals => { :le => lhl[1]}%>
+      <td class="raking">
+        <%= image_tag("2nd.png")%>
       </td>
-      <td>
-        <%= render :partial => 'legislators', :locals => { :le => lhl[2]}%>
+      <td class="raking">
+        <%= image_tag("3rd.png")%>
       </td>
     </tr>
-  <%end%>
-</table>
+
+    <tr>
+      <td id="total_raking">
+        <div >
+          <%=link_to "總票數",legislators_path,:class =>"btn btn-danger btn-lg"%>
+        </div>
+      </td>
+    </tr> 
+
+    <% @higher_legislators_by_categories.each do |c, lhl|%>
+      <tr>
+        <td class="le-cate">
+          <%= render :partial => 'category_icon', :locals => { :c => c} %>
+          <div>
+          <%=link_to c.name,legislators_path,:class =>"btn btn-info btn-lg"%>
+          </div>
+        </td>
+        <td>
+          <%= render :partial => 'legislators', :locals => { :le => lhl[0]}%>   
+        </td>
+        <td>
+           <%= render :partial => 'legislators', :locals => { :le => lhl[1]}%>
+        </td>
+        <td>
+          <%= render :partial => 'legislators', :locals => { :le => lhl[2]}%>
+        </td>
+      </tr>
+    <%end%>
+  </table>
 
 </div>
