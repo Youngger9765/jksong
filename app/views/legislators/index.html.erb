@@ -3,6 +3,17 @@
 </h1>
 
 <div class="col-md-8 col-md-offset-2">
+  <tr>
+    <td id="category_area">
+      <div class="btn btn-primary btn-lg">
+        總票數
+      </div>
+    </td>
+  </tr>
+
+
+
+
 
 <table class="table" >
   <tr>
@@ -22,7 +33,7 @@
     </td>
   </tr>
 
-  <% @categories_all.each do |c|%>
+  <% @higher_legislators_by_categories.each do |c, lhl|%>
     <tr>
       <td id="le-cate">
         <%= render :partial => 'category_icon', :locals => { :c => c} %>
@@ -31,13 +42,13 @@
         </div>
       </td>
       <td>
-        <%= render :partial => 'legislators', :locals => { :le => Legislator.get_higher_legislators_in_category(c.english_name)[0]}%>   
+        <%= render :partial => 'legislators', :locals => { :le => lhl[0]}%>   
       </td>
       <td>
-         <%= render :partial => 'legislators', :locals => { :le => Legislator.get_higher_legislators_in_category(c.english_name)[1]}%>
+         <%= render :partial => 'legislators', :locals => { :le => lhl[1]}%>
       </td>
       <td>
-        <%= render :partial => 'legislators', :locals => { :le => Legislator.get_higher_legislators_in_category(c.english_name)[2]}%>
+        <%= render :partial => 'legislators', :locals => { :le => lhl[2]}%>
       </td>
     </tr>
   <%end%>

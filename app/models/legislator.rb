@@ -17,20 +17,67 @@ class Legislator < ActiveRecord::Base
     end
   end
   
-  def get_scores_by_categories
-    categories = Category.pluck(:english_name) << 'total'
+  def get_scores_by_categories(catrgories=nil)
+    if catrgories
+      category_names = catrgories.map{ |c| c.english_name }
+    else
+      category_names = Category.pluck(:english_name) 
+    end
+    category_names << 'total'
+
     results = Hash.new(0)
 
     self.profile_legislator_ships.each do |s|
-      categories.each do |c|
+      category_names.each do |c|
         results[c] += s.public_send(c)
       end
     end    
     results
   end  
 
+  def self.get_higher_legislators
+    legislators = Legislator.includes(:profile_legislator_ships).all
+    categories = Category.all
+    result = {}
+
+    all_scores = {}
+    legislators.each do |le|
+      all_scores[le] = le.get_scores_by_categories(categories)
+    end
+
+    categories.each do |category|
+      get_score=0
+      first_score=0
+      second_score=0
+      third_score=0
+
+      first = nil
+      second = nil
+      third = nil
+
+      legislators.each do |le|        
+        get_score = all_scores[le][category.english_name].to_i
+
+        if get_score > first_score
+          first = le
+          first_score = get_score
+        elsif get_score > second_score
+          second = le
+          second_score = get_score
+        elsif get_score > third_score
+          third = le
+          third_score = get_score
+        end  
+      end
+
+      result[category] = [first,second,third]
+    end
+
+    result
+  end
+
   def self.get_higher_legislators_in_category(category)
-    @legislators = Legislator.all
+    legislators = Legislator.all
     
     get_score=0
     first_score=0
@@ -41,9 +88,9 @@ class Legislator < ActiveRecord::Base
     second = nil
     third = nil
 
-    @legislators.each do |le|
+    legislators.each do |le|
       get_score = le.get_scores_by_categories[category]
-      puts get_score
+
       if get_score > first_score
         first = le
         first_score = get_score
@@ -55,10 +102,8 @@ class Legislator < ActiveRecord::Base
         third_score = get_score
       end  
     end
-    puts 'checkeeee'
-    puts [first,second,third]
 
-    @legislators_list = [first,second,third]
+    [first,second,third]
 
   end
 
