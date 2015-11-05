@@ -1,17 +1,11 @@
-json.metadata do
-  json.total Legislator.count
-end
-
-json.data @legislators do |le|
-  json.id le.id
-  json.name le.name
-  json.gender le.gender
-  json.county le.county
-  json.party le.party
-  json.ad le.ad
-  json.in_office le.in_office
-  json.education le.education
-  json.experience le.experience
-  json.image le.image
+json.data @higher_legislators_by_categories do |c, lhl|
+  json.category c
+  json.legislator  lhl[:rank] do |l|
+    json.id l.id
+    json.name l.name
+    json.party_logo l.party_logo
+    json.party l.party
+    json.image l.image
+  end
 
 end
