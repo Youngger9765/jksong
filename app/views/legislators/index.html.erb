@@ -2,13 +2,10 @@
   第八屆立法委員
 </h1>
 
+
 <div class="col-md-8 col-md-offset-2">
   <tr>
-    <td id="category_area">
-      <div class="btn btn-primary btn-lg">
-        總票數
-      </div>
-    </td>
+    
   </tr>
 
 
@@ -16,10 +13,11 @@
 
 
 <table class="table" >
+
   <tr>
     <td id="category_area">
       <div class="btn btn-primary btn-lg">
-        領域
+        分類領域
       </div>
     </td>
     <td class="raking">
@@ -33,9 +31,17 @@
     </td>
   </tr>
 
+  <tr>
+    <td id="total_raking">
+      <div >
+        <%=link_to "總票數",legislators_path,:class =>"btn btn-danger btn-lg"%>
+      </div>
+    </td>
+  </tr> 
+
   <% @higher_legislators_by_categories.each do |c, lhl|%>
     <tr>
-      <td id="le-cate">
+      <td class="le-cate">
         <%= render :partial => 'category_icon', :locals => { :c => c} %>
         <div>
         <%=link_to c.name,legislators_path,:class =>"btn btn-info btn-lg"%>
