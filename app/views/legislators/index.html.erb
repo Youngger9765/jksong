@@ -28,9 +28,17 @@
       <tr>
         <td class="le-cate">
           <%= render :partial => 'category_icon', :locals => { :name => lhl[:name]} %>
-          <div>
-          <%=link_to lhl[:name],legislators_path,:class =>"btn btn-info btn-lg"%>
-          </div>
+          <%if lhl[:name] =="總票數"%>
+            <div>
+              <%=link_to lhl[:name],legislators_path,:class =>"btn btn-danger btn-lg"%>
+            </div>
+          <%else%>
+            <div>
+              <%=link_to lhl[:name],legislators_path,:class =>"btn btn-info btn-lg"%>
+            </div>
+          <%end%>
+
+          
         </td>
         <td>
           <%= render :partial => 'legislators', :locals => { :le => lhl[:rank][0]}%>   
