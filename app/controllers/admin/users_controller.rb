@@ -31,7 +31,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:role)
+    params.require(:profile).permit(:role, :location_id)
   end
 
 

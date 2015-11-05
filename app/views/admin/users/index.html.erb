@@ -16,6 +16,7 @@
         <%= form_for p, url: admin_user_path(p), :method => :PATCH , :class => "form" do |p|%>
 
           <div class="form-group">
+            <%=p.select :location_id, Location.all.map{ |x| [x.name, x.id]}, :class => "form-control" %>
             <%=p.select :role, [["admin","admin"],["normal","normal"]], :class => "form-control"%>
             <%=p.submit "Update", :class => "btn btn-primary"%>
           </div>
