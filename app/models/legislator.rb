@@ -45,7 +45,9 @@ class Legislator < ActiveRecord::Base
       all_scores[le] = le.get_scores_by_categories(categories)
     end
 
-    categories.each do |category|
+    cat = categories.map{|c| {english_name: c.english_name, name:c.name}}.unshift({english_name:"total",name:"總票數"})
+    # categories.each do |category|
+    cat.each do |category|
       get_score=0
       first_score=0
       second_score=0
@@ -56,7 +58,7 @@ class Legislator < ActiveRecord::Base
       third = nil
 
       legislators.each do |le|        
-        get_score = all_scores[le][category.english_name].to_i
+        get_score = all_scores[le][category[:english_name]].to_i
 
         if get_score > first_score
           first = le
@@ -69,11 +71,12 @@ class Legislator < ActiveRecord::Base
           third_score = get_score
         end  
       end
-
-      result[category] = [first,second,third]
+      result[category[:english_name]] = {rank: [first,second,third], name:category[:name]} 
+      
     end
-
+    
     result
+    
   end
 
   def self.get_higher_legislators_in_category(category)
