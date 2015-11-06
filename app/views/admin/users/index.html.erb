@@ -28,7 +28,7 @@
       </td>
       <td>
         <div class="col-md-6">
-          <%= link_to "clear_my_all_vote", issues_clear_all_path, :method => :post, :class => "btn btn-info btn-large"%>
+          <%= link_to "clear_my_all_vote", admin_issues_clear_all_path(:profile_id => p.id), :method => :post, :class => "btn btn-info btn-large"%>
         </div>
       </td>
     </tr>
