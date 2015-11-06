@@ -55,6 +55,7 @@ before_action :set_vote, :only => [:show, :edit, :update]
     @users = User.all
     @issues = Issue.all
     @votes = Vote.all 
+    @legislators = Legislator.all
   end
 
 
