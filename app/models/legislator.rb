@@ -56,6 +56,9 @@ class Legislator < ActiveRecord::Base
       first = nil
       second = nil
       third = nil
+      first_all_scores = nil
+      second_all_scores = nil
+      third_all_scores =nil
 
       legislators.each do |le|        
         get_score = all_scores[le][category[:english_name]].to_i
@@ -63,17 +66,27 @@ class Legislator < ActiveRecord::Base
         if get_score > first_score
           first = le
           first_score = get_score
+          first_all_scores = all_scores[le]
+          
         elsif get_score > second_score
           second = le
           second_score = get_score
+          second_all_scores = all_scores[le]
         elsif get_score > third_score
           third = le
           third_score = get_score
+          third_all_scores = all_scores[le]
         end  
       end
-      result[category[:english_name]] = {rank: [first,second,third], name:category[:name]} 
+      
+      result[category[:english_name]] = {rank: [[first,first_all_scores],
+                                                [second,second_all_scores ],
+                                                [third,third_all_scores]],
+                                         name: category[:name]} 
+
       
     end
+    
     
     result
     
