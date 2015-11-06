@@ -1,4 +1,4 @@
-<div class="container" id="issue-show">
+<div class="container col-md-8 col-md-offset-2" id="issue-show">
   <div class="row">
     <% @issues.each do |i| %>
       <% if current_user &&  !@profile.vote_issue?(i)%>
@@ -32,6 +32,7 @@
     <% end %>
   </div>
 </div>
+
 
 
 
