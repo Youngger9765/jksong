@@ -52,6 +52,7 @@ class Admin::IssuesController < ApplicationController
     end
 
     if params[:destroy_logo] == "1"
+
       @issue.logo = nil
     end
 
@@ -76,6 +77,19 @@ class Admin::IssuesController < ApplicationController
       format.html { redirect_to :back }
       format.js # destroy.js.erb
     end
+  end
+
+  def clear_all
+    @profile = Profile.find(params[:profile_id])
+
+    @profile.profile_legislator_ships.delete_all
+    @profile.profile_issue_ships.delete_all
+
+    @profile.vote_number = 0
+    @profile.issue_number = 0
+    @profile.save!
+
+    redirect_to :back
   end
 
   protected
