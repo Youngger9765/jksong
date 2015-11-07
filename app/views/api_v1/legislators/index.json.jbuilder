@@ -9,7 +9,25 @@ json.legislator @higher_legislators_by_category[1][:rank] do |le|
 
   json.score_max le[2]
   json.score_table le[1] do |s|
-    json.category s[0]
+    if s[0] == "law"
+      json.category "司法/法制"
+    elsif s[0] == "diplomacy"
+      json.category "外交/國防"
+    elsif s[0] == "interior"
+      json.category "內政"
+    elsif s[0] == "finance"
+      json.category "財政"
+    elsif s[0] == "economy"
+      json.category "經濟"
+    elsif s[0] == "traffic"
+      json.category "交通"
+    elsif s[0] == "education"
+      json.category "教育/文化"
+    elsif s[0] == "social"
+      json.category "社福/衛環"
+    elsif s[0] == "total"
+      json.category "total"
+    end
     json.le_get_score s[1]
   end
 end
