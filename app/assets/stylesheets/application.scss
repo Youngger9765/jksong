@@ -114,6 +114,10 @@ iframe{
   height:250px;
 }
 
+#br_rwd{
+  display: none;
+}
+
 @media (max-width: 520px) {
   #bigbox {
     img{
@@ -122,7 +126,7 @@ iframe{
       height: 1500px;
     }
     h1{
-      font-size: 16px;
+      font-size: 14px;
     }
     h2{
       font-size: 14px;
@@ -131,7 +135,7 @@ iframe{
 
   #box{
     padding-top: 250px;
-    padding-left:70px;
+    padding-left:50px;
     font-family:Microsoft JhengHei,serif,sans-serif,cursive,fantasy,monospace;
 
   }
@@ -143,7 +147,7 @@ iframe{
 
   #box li{
     margin:10px; 
-    font-size: 10px; 
+    font-size: 6px; 
   }
 
   #box h2{
@@ -151,8 +155,11 @@ iframe{
   }
 
   iframe{
-    width:250px; 
+    width:200px; 
     height:250px;
+  }
+  #br_rwd{
+    display: inherit;
   }
 }
 
