@@ -59,8 +59,9 @@
                   <%= current_user.profile.username%>
                   <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
               <% else %>
+                <%= link_to('登入', new_session_path(:user)) %>
                   
-            <% end %>
+              <% end %>
             </div>
           </div>
          </div>
